@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
 import { MicInputBar } from "@/components/MicInputBar";
-import { PenLine, ChevronLeft } from "lucide-react";
+import { PenLine, ChevronLeft, Play } from "lucide-react";
 
 interface Message {
   role: "ai" | "user";
@@ -155,17 +155,25 @@ export default function InterviewPage() {
             </div>
           ) : (
             <div key={i} className="flex justify-end" style={{ marginBottom: 20 }}>
-              <div
-                style={{
-                  backgroundColor: "var(--accent-warm)",
-                  borderRadius: "16px 0 16px 16px",
-                  padding: 14,
-                  maxWidth: 240,
-                }}
-              >
-                <p style={{ fontSize: 16, lineHeight: 1.5, color: "var(--white)" }}>
-                  {msg.text}
-                </p>
+              <div className="flex flex-col items-end gap-[4px]">
+                <div
+                  style={{
+                    backgroundColor: "var(--accent-warm)",
+                    borderRadius: "16px 0 16px 16px",
+                    padding: 14,
+                    maxWidth: 240,
+                  }}
+                >
+                  <p style={{ fontSize: 16, lineHeight: 1.5, color: "var(--white)" }}>
+                    {msg.text}
+                  </p>
+                </div>
+                <span className="text-[11px] text-[var(--text-tertiary)] font-outfit flex items-center gap-[6px]">
+                  <button className="w-[22px] h-[22px] rounded-full bg-[var(--accent-warm)] flex items-center justify-center shrink-0">
+                    <Play size={11} className="text-white" fill="white" style={{ marginLeft: 1 }} />
+                  </button>
+                  语音转文字
+                </span>
               </div>
             </div>
           )

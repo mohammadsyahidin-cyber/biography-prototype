@@ -70,17 +70,17 @@ export default function HomePage() {
           </div>
           <div className="flex flex-col gap-3" style={{ paddingBottom: 8 }}>
             {[
-              { avatar: "妈", avatarBg: "var(--accent-coral)", text: "妈妈补充了「清水河摸鱼」的回忆", time: "2小时前" },
-              { avatar: "叙", avatarBg: "var(--accent-green)", text: "小叙已生成「童年生活」章节草稿", time: "昨天" },
-              { avatar: "爸", avatarBg: "var(--accent-warm)", text: "爸爸讲述了求学路上的故事", time: "3天前" },
+              { avatar: "妈", avatarBg: "var(--accent-coral)", text: "妈妈补充了「清水河摸鱼」的回忆", time: "2小时前", href: "/mom-chat" },
+              { avatar: "叙", avatarBg: "var(--accent-green)", text: "小叙已生成「童年生活」章节草稿", time: "昨天", href: "/article-final" },
+              { avatar: "爸", avatarBg: "var(--accent-warm)", text: "爸爸讲述了求学路上的故事", time: "3天前", href: "/chat-history" },
             ].map((item, i) => (
-              <div key={i} className="flex items-start gap-3" style={{ backgroundColor: "var(--bg-card)", borderRadius: 14, padding: "14px 16px", border: "1px solid var(--border-subtle)" }}>
+              <Link key={i} href={item.href} className="flex items-start gap-3" style={{ backgroundColor: "var(--bg-card)", borderRadius: 14, padding: "14px 16px", border: "1px solid var(--border-subtle)" }}>
                 <div className="flex items-center justify-center shrink-0" style={{ width: 32, height: 32, borderRadius: 16, backgroundColor: item.avatarBg, color: "var(--white)", fontSize: 13, fontWeight: 600 }}>{item.avatar}</div>
                 <div className="flex-1">
                   <p style={{ fontSize: 14, color: "var(--text-primary)", lineHeight: "20px" }}>{item.text}</p>
                   <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4 }}>{item.time}</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

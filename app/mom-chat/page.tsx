@@ -6,30 +6,34 @@ import { StatusBar } from "@/components/StatusBar";
 import { BackHeader } from "@/components/BackHeader";
 
 interface ChatMessage {
-  role: "ai" | "dad";
+  role: "ai" | "mom";
   text: string;
 }
 
 const messages: ChatMessage[] = [
   {
     role: "ai",
-    text: "爸爸您好！今天想和您聊聊小时候的事情。您小时候最喜欢玩什么呀？",
+    text: "你好！爸爸之前提到小时候去清水河摸鱼的事，你有什么相关的记忆或补充吗？",
   },
   {
-    role: "dad",
-    text: "我小时候最喜欢去清水河摸鱼，那时候河水清得很，一眼就能看到鱼在水底游。",
-  },
-  {
-    role: "ai",
-    text: "清水河摸鱼听起来太有意思了！那时候是您一个人去，还是和兄弟们一起？",
-  },
-  {
-    role: "dad",
-    text: "都是和兄弟们一起去，我们四兄弟，每次去都比谁摸的鱼多。",
+    role: "mom",
+    text: "有有有！那时候他们兄弟几个天天往河边跑，回来一身泥，我婆婆每次都要骂。",
   },
   {
     role: "ai",
-    text: "四兄弟比赛摸鱼，画面感好强！那你们摸到过特别大的鱼吗？",
+    text: "哈哈，回来一身泥还要挨骂！那您还记得他们一般什么时候去吗？",
+  },
+  {
+    role: "mom",
+    text: "夏天最多，放学了书包一扔就跑。有一回建国摸到一条大鲤鱼，高兴得不得了，拎回家让他妈做了一大锅鱼汤。",
+  },
+  {
+    role: "ai",
+    text: "摸到大鲤鱼还做了鱼汤，这个细节太好了！那条鱼大概有多大呀？",
+  },
+  {
+    role: "mom",
+    text: "他说有两斤多呢，不过我觉得他吹牛，顶多一斤半。那会儿河里鱼多，随便摸都有，不像现在。",
   },
 ];
 
@@ -41,11 +45,11 @@ function AiAvatar() {
   );
 }
 
-function DadAvatar() {
+function MomAvatar() {
   return (
     <div className="w-[36px] h-[36px] rounded-full bg-[var(--accent-coral)] flex items-center justify-center shrink-0">
       <span className="text-white text-[14px] font-semibold font-outfit">
-        爸
+        妈
       </span>
     </div>
   );
@@ -59,9 +63,7 @@ function AiMessage({ text }: { text: string }) {
         <span className="text-[13px] font-semibold text-[var(--text-primary)] font-outfit">
           小叙
         </span>
-        <div
-          className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-[0px_16px_16px_16px] p-[14px] max-w-[270px]"
-        >
+        <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-[0px_16px_16px_16px] p-[14px] max-w-[270px]">
           <p className="text-[16px] leading-relaxed text-[var(--text-primary)] font-outfit">
             {text}
           </p>
@@ -71,17 +73,15 @@ function AiMessage({ text }: { text: string }) {
   );
 }
 
-function DadMessage({ text }: { text: string }) {
+function MomMessage({ text }: { text: string }) {
   return (
     <div className="flex gap-[10px] items-start">
-      <DadAvatar />
+      <MomAvatar />
       <div className="flex flex-col gap-[4px]">
         <span className="text-[13px] font-semibold text-[var(--text-primary)] font-outfit">
-          爸爸
+          妈妈
         </span>
-        <div
-          className="bg-[var(--accent-green)] rounded-[0px_16px_16px_16px] p-[14px] max-w-[240px]"
-        >
+        <div className="bg-[var(--accent-coral)] rounded-[0px_16px_16px_16px] p-[14px] max-w-[240px]">
           <p className="text-[16px] leading-relaxed text-white font-outfit">
             {text}
           </p>
@@ -97,16 +97,16 @@ function DadMessage({ text }: { text: string }) {
   );
 }
 
-export default function ChatHistoryPage() {
+export default function MomChatPage() {
   return (
     <PhoneFrame>
       <StatusBar />
-      <BackHeader title="爸爸的对话记录" />
+      <BackHeader title="妈妈的对话记录" />
 
       {/* Context bar */}
       <div className="bg-[var(--bg-surface)] px-[16px] py-[8px]">
         <span className="text-[12px] text-[var(--text-tertiary)] font-outfit">
-          第一章 · 清水河摸鱼 · 主讲人对话
+          第一章 · 清水河摸鱼 · 家人补充
         </span>
       </div>
 
@@ -116,7 +116,7 @@ export default function ChatHistoryPage() {
           msg.role === "ai" ? (
             <AiMessage key={i} text={msg.text} />
           ) : (
-            <DadMessage key={i} text={msg.text} />
+            <MomMessage key={i} text={msg.text} />
           )
         )}
       </div>
@@ -124,7 +124,7 @@ export default function ChatHistoryPage() {
       {/* Bottom readonly bar */}
       <div className="bg-[var(--bg-surface)] py-[12px] flex items-center justify-center">
         <span className="text-[13px] text-[var(--text-tertiary)] font-outfit">
-          你正在查看爸爸的对话记录（只读）
+          你正在查看妈妈的对话记录（只读）
         </span>
       </div>
     </PhoneFrame>

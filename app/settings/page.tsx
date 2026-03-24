@@ -12,6 +12,8 @@ import {
   MessageSquare,
   ChevronRight,
   LogOut,
+  Plus,
+  ArrowLeftRight,
 } from "lucide-react";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
@@ -183,6 +185,18 @@ export default function SettingsPage() {
 
         {/* Biography settings */}
         <SettingsSection title="当前传记" rows={biographyRows} />
+
+        {/* Biography management */}
+        <div className="flex gap-[10px]">
+          <button className="flex-1 flex items-center justify-center gap-[8px] rounded-[14px] bg-[var(--accent-green)] py-[13px]">
+            <Plus size={18} className="text-white" />
+            <span className="text-[14px] font-semibold text-white font-outfit">新建传记</span>
+          </button>
+          <button className="flex-1 flex items-center justify-center gap-[8px] rounded-[14px] bg-[var(--bg-card)] border border-[var(--border-strong)] py-[13px]">
+            <ArrowLeftRight size={16} className="text-[var(--text-primary)]" />
+            <span className="text-[14px] font-semibold text-[var(--text-primary)] font-outfit">切换传记</span>
+          </button>
+        </div>
 
         {/* General settings */}
         <SettingsSection title="通用设置" rows={generalRows} />

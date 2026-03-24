@@ -66,7 +66,7 @@ export default function TopicDetailPage() {
             <div style={{ fontSize: 13, lineHeight: 1.6, color: "var(--text-secondary)", marginBottom: 12 }}>
               <p>“他小时候可调皮了，每次去摸鱼回来都浑身湿透…”</p>
             </div>
-            <Link href="/chat-history" className="flex items-center gap-1" style={{ fontSize: 13, fontWeight: 500, color: "var(--accent-green)" }}>
+            <Link href="/mom-chat" className="flex items-center gap-1" style={{ fontSize: 13, fontWeight: 500, color: "var(--accent-green)" }}>
               查看完整对话<ChevronRight size={14} />
             </Link>
           </div>

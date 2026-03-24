@@ -1,6 +1,6 @@
 "use client";
 
-import { PenLine } from "lucide-react";
+import { PenLine, Play } from "lucide-react";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
 import { BackHeader } from "@/components/BackHeader";
@@ -41,7 +41,10 @@ function UserMessage({ text }: { text: string }) {
             {text}
           </p>
         </div>
-        <span className="text-[11px] text-[var(--text-tertiary)] font-outfit">
+        <span className="text-[11px] text-[var(--text-tertiary)] font-outfit flex items-center gap-[6px]">
+          <button className="w-[22px] h-[22px] rounded-full bg-[var(--accent-warm)] flex items-center justify-center shrink-0">
+            <Play size={11} className="text-white" fill="white" style={{ marginLeft: 1 }} />
+          </button>
           语音转文字 · 刚刚
         </span>
       </div>
