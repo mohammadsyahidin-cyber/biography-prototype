@@ -34,7 +34,7 @@ export default function HomePage() {
           {/* project card */}
           <div style={{ borderRadius: 20, overflow: "hidden", boxShadow: "0 4px 20px rgba(44,36,25,0.08)" }}>
             <div style={{ position: "relative", overflow: "hidden" }}>
-              <img src="/images/card-bg.jpg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+              <img src="/biography-prototype/images/card-bg.jpg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(90,65,35,0.82) 0%, rgba(60,45,25,0.72) 100%)" }} />
               <div style={{ position: "relative", padding: "24px 20px 20px" }}>
                 <p style={{ fontSize: 12, color: "rgba(255,255,255,0.65)", marginBottom: 6, letterSpacing: 1 }}>家族传记</p>

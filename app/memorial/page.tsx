@@ -15,7 +15,7 @@ export default function MemorialPage() {
         {/* Hero section with image */}
         <div style={{ position: "relative", height: 360, overflow: "hidden" }}>
           <img
-            src="/images/card-bg.jpg"
+            src="/biography-prototype/images/card-bg.jpg"
             alt=""
             style={{
               position: "absolute",
