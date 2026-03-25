@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
-import { ChevronLeft, Share2, BookOpen, Heart, List, X, Check, PenLine, Lock } from "lucide-react";
+import { ChevronLeft, Share2, BookOpen, Heart, List, X, Check, PenLine, Lock, MessageCircle, ThumbsUp, Copy, QrCode } from "lucide-react";
 
 type SectionStatus = "done" | "draft" | "todo";
 type Section = { title: string; status: SectionStatus };
@@ -60,6 +60,9 @@ const articleBody = [
 
 export default function ArticleFinalPage() {
   const [showToc, setShowToc] = useState(false);
+  const [showShare, setShowShare] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(24);
   const statusMap: Record<string, { label: string; bg: string; color: string; Icon: typeof Check }> = {
     done: { label: "已完成", bg: "var(--accent-green-light)", color: "var(--accent-green)", Icon: Check },
     draft: { label: "草稿", bg: "var(--accent-coral-light)", color: "var(--accent-coral)", Icon: PenLine },
@@ -103,6 +106,7 @@ export default function ArticleFinalPage() {
             <List size={18} style={{ color: "var(--text-secondary)" }} />
           </button>
           <button
+            onClick={() => { setLiked(!liked); setLikeCount(liked ? likeCount - 1 : likeCount + 1); }}
             className="flex items-center justify-center"
             style={{
               width: 36,
@@ -113,9 +117,10 @@ export default function ArticleFinalPage() {
               cursor: "pointer",
             }}
           >
-            <Heart size={18} style={{ color: "var(--text-secondary)" }} />
+            <Heart size={18} fill={liked ? "var(--accent-coral)" : "none"} style={{ color: liked ? "var(--accent-coral)" : "var(--text-secondary)" }} />
           </button>
           <button
+            onClick={() => setShowShare(true)}
             className="flex items-center justify-center"
             style={{
               width: 36,
@@ -236,6 +241,58 @@ export default function ArticleFinalPage() {
               </div>
             </div>
           </div>
+
+          {/* Likes & Comments Section */}
+          <div style={{ marginTop: 28 }}>
+            {/* Divider */}
+            <div style={{ height: 1, backgroundColor: "var(--border-subtle)", marginBottom: 20 }} />
+
+            {/* Like button row */}
+            <div className="flex items-center justify-between" style={{ marginBottom: 20 }}>
+              <button
+                onClick={() => { setLiked(!liked); setLikeCount(liked ? likeCount - 1 : likeCount + 1); }}
+                className="flex items-center gap-2"
+                style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}
+              >
+                <Heart size={22} fill={liked ? "var(--accent-coral)" : "none"} style={{ color: "var(--accent-coral)" }} />
+                <span className="font-outfit" style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>{likeCount}</span>
+              </button>
+              <div className="flex items-center gap-2">
+                <MessageCircle size={20} style={{ color: "var(--text-secondary)" }} />
+                <span className="font-outfit" style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>3</span>
+              </div>
+            </div>
+
+            {/* Comments */}
+            <div className="flex flex-col gap-4">
+              {[
+                { avatar: "妈", bg: "var(--accent-coral)", name: "妈妈", time: "2小时前", text: "写得真好，看哭了。那条鱼的事我也记得，他讲了好多遍，每次都说有两斤多哈哈。" },
+                { avatar: "姐", bg: "var(--accent-warm)", name: "大姐", time: "昨天", text: "爸爸小时候真调皮！可惜清水河现在已经不是以前的样子了。" },
+                { avatar: "明", bg: "var(--accent-green)", name: "小明", time: "3天前", text: "谢谢爸妈讲述这些故事，每一段都是珍贵的记忆。" },
+              ].map((c, i) => (
+                <div key={i} className="flex gap-3">
+                  <div className="flex items-center justify-center shrink-0" style={{ width: 32, height: 32, borderRadius: 16, backgroundColor: c.bg, color: "var(--white)", fontSize: 13, fontWeight: 600 }}>{c.avatar}</div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2" style={{ marginBottom: 4 }}>
+                      <span className="font-outfit" style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>{c.name}</span>
+                      <span className="font-outfit" style={{ fontSize: 11, color: "var(--text-tertiary)" }}>{c.time}</span>
+                    </div>
+                    <p className="font-outfit" style={{ fontSize: 14, lineHeight: 1.6, color: "var(--text-secondary)" }}>{c.text}</p>
+                    <button className="flex items-center gap-1 font-outfit" style={{ border: "none", background: "none", cursor: "pointer", padding: 0, marginTop: 6 }}>
+                      <ThumbsUp size={13} style={{ color: "var(--text-tertiary)" }} />
+                      <span style={{ fontSize: 12, color: "var(--text-tertiary)" }}>{i === 0 ? "5" : i === 1 ? "2" : ""}</span>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Comment input */}
+            <div className="flex items-center gap-3" style={{ marginTop: 20, padding: "12px 14px", borderRadius: 14, backgroundColor: "var(--bg-surface)", border: "1px solid var(--border-subtle)" }}>
+              <div className="flex items-center justify-center shrink-0" style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: "var(--accent-green)", color: "var(--white)", fontSize: 11, fontWeight: 600 }}>我</div>
+              <span className="font-outfit flex-1" style={{ fontSize: 14, color: "var(--text-tertiary)" }}>写下你的感想...</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -249,10 +306,11 @@ export default function ArticleFinalPage() {
         }}
       >
         <div className="flex items-center gap-2">
-          <Heart size={16} style={{ color: "var(--accent-coral)" }} />
-          <span style={{ fontSize: 13, color: "var(--text-secondary)" }}>这段回忆，值得珍藏</span>
+          <Heart size={16} fill={liked ? "var(--accent-coral)" : "none"} style={{ color: "var(--accent-coral)" }} />
+          <span style={{ fontSize: 13, color: "var(--text-secondary)" }}>{likeCount} 人觉得值得珍藏</span>
         </div>
         <button
+          onClick={() => setShowShare(true)}
           className="flex items-center gap-1.5"
           style={{
             height: 36,
@@ -270,6 +328,89 @@ export default function ArticleFinalPage() {
           分享
         </button>
       </div>
+
+      {/* Share Modal */}
+      {showShare && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 50,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+          }}
+        >
+          <div onClick={() => setShowShare(false)} style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.45)" }} />
+          <div
+            className="font-outfit"
+            style={{
+              position: "relative",
+              backgroundColor: "var(--bg-card)",
+              borderRadius: "20px 20px 0 0",
+              padding: "0 24px 32px",
+            }}
+          >
+            {/* Handle */}
+            <div className="flex justify-center" style={{ padding: "10px 0 16px" }}>
+              <div style={{ width: 36, height: 4, borderRadius: 2, backgroundColor: "var(--border-subtle)" }} />
+            </div>
+
+            {/* Article preview card */}
+            <div className="flex gap-3" style={{ padding: "14px 16px", borderRadius: 14, backgroundColor: "var(--bg-surface)", border: "1px solid var(--border-subtle)", marginBottom: 24 }}>
+              <div style={{ width: 56, height: 56, borderRadius: 10, backgroundColor: "var(--accent-green-light)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <BookOpen size={24} style={{ color: "var(--accent-green)" }} />
+              </div>
+              <div className="flex-1 flex flex-col justify-center">
+                <p className="font-serif-sc" style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)", lineHeight: 1.3 }}>清水河边的少年时光</p>
+                <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4 }}>第一章 · 童年生活 · 父亲的岁月</p>
+              </div>
+            </div>
+
+            {/* Share options */}
+            <div className="flex items-center justify-around" style={{ marginBottom: 24 }}>
+              {[
+                { icon: "💬", label: "微信", bg: "#07C160" },
+                { icon: "👥", label: "朋友圈", bg: "#07C160" },
+                { icon: "QR", label: "二维码", bg: "var(--accent-warm)", isIcon: true },
+                { icon: "CP", label: "复制链接", bg: "var(--accent-green)", isIcon: true },
+              ].map((item, i) => (
+                <button key={i} className="flex flex-col items-center gap-2" style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}>
+                  <div className="flex items-center justify-center" style={{ width: 48, height: 48, borderRadius: 14, backgroundColor: item.bg }}>
+                    {item.isIcon && item.icon === "QR" ? (
+                      <QrCode size={22} style={{ color: "var(--white)" }} />
+                    ) : item.isIcon && item.icon === "CP" ? (
+                      <Copy size={22} style={{ color: "var(--white)" }} />
+                    ) : (
+                      <span style={{ fontSize: 24 }}>{item.icon}</span>
+                    )}
+                  </div>
+                  <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>{item.label}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Cancel button */}
+            <button
+              onClick={() => setShowShare(false)}
+              className="flex items-center justify-center"
+              style={{
+                width: "100%",
+                height: 48,
+                borderRadius: 14,
+                backgroundColor: "var(--bg-muted)",
+                border: "none",
+                cursor: "pointer",
+                fontSize: 15,
+                fontWeight: 600,
+                color: "var(--text-secondary)",
+              }}
+            >
+              取消
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* TOC Drawer overlay */}
       {showToc && (
