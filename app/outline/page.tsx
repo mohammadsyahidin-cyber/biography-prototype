@@ -604,7 +604,7 @@ export default function OutlinePage() {
               right: 0,
               backgroundColor: "var(--bg-card)",
               borderRadius: "20px 20px 0 0",
-              maxHeight: "85%",
+              maxHeight: "70%",
               overflow: "auto",
             }}
           >
@@ -615,10 +615,7 @@ export default function OutlinePage() {
 
             {/* Header */}
             <div className="flex items-center justify-between" style={{ padding: "12px 20px 0" }}>
-              <div>
-                <span style={{ fontSize: 17, fontWeight: 700, color: "var(--text-primary)", display: "block" }}>邀请家人完善大纲</span>
-                <span style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 2, display: "block" }}>邀请家庭成员一起回忆、补充章节内容</span>
-              </div>
+              <span style={{ fontSize: 17, fontWeight: 700, color: "var(--text-primary)" }}>邀请家人完善大纲</span>
               <button
                 onClick={() => setShowShare(false)}
                 className="flex items-center justify-center"
@@ -629,54 +626,18 @@ export default function OutlinePage() {
             </div>
 
             <div style={{ padding: "16px 20px 28px" }}>
-              {/* Current outline summary */}
-              <div
-                style={{
-                  padding: "14px 16px",
-                  borderRadius: 14,
-                  backgroundColor: "var(--accent-green-light)",
-                  border: "1px solid var(--accent-green)",
-                  marginBottom: 20,
-                }}
-              >
-                <div className="flex items-center gap-3" style={{ marginBottom: 10 }}>
-                  <BookOpen size={16} style={{ color: "var(--accent-green)" }} />
-                  <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>《父亲的岁月》 大纲</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <span style={{ fontSize: 12, color: "var(--accent-green)" }}>{chapters.length} 个章节</span>
-                  <span style={{ fontSize: 12, color: "var(--accent-green)" }}>{totalSections} 个小节</span>
-                </div>
-                <div className="flex flex-wrap gap-1.5" style={{ marginTop: 10 }}>
-                  {chapters.map((ch) => (
-                    <span
-                      key={ch.id}
-                      style={{
-                        fontSize: 11,
-                        padding: "3px 8px",
-                        borderRadius: 6,
-                        backgroundColor: "var(--bg-card)",
-                        color: "var(--text-secondary)",
-                        border: "1px solid var(--border-subtle)",
-                      }}
-                    >
-                      {ch.num}. {ch.title}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Already joined members */}
-              <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-secondary)", display: "block", marginBottom: 10 }}>已参与的家人</span>
+              {/* Members */}
               <div className="flex flex-col gap-3" style={{ marginBottom: 20 }}>
                 {[
-                  { name: "小明（我）", role: "发起人", avatar: "明", bg: "var(--accent-green)", isMe: true },
-                  { name: "爸爸", role: "主讲人", avatar: "爸", bg: "var(--accent-coral)", isMe: false },
+                  { name: "小明（我）", role: "发起人", avatar: "明", bg: "var(--accent-green)", joined: true },
+                  { name: "爸爸", role: "主讲人", avatar: "爸", bg: "var(--accent-coral)", joined: true },
+                  { name: "妈妈", role: "补充讲述", avatar: "妈", bg: "var(--accent-coral)", joined: false },
+                  { name: "大姐", role: "补充讲述", avatar: "姐", bg: "var(--accent-warm)", joined: false },
                 ].map((m, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <div
                       className="flex items-center justify-center shrink-0"
-                      style={{ width: 38, height: 38, borderRadius: 19, backgroundColor: m.bg, color: "#fff", fontSize: 14, fontWeight: 600 }}
+                      style={{ width: 38, height: 38, borderRadius: 19, backgroundColor: m.bg, color: "#fff", fontSize: 14, fontWeight: 600, opacity: m.joined ? 1 : 0.6 }}
                     >
                       {m.avatar}
                     </div>
@@ -684,63 +645,31 @@ export default function OutlinePage() {
                       <span style={{ fontSize: 14, fontWeight: 500, color: "var(--text-primary)", display: "block" }}>{m.name}</span>
                       <span style={{ fontSize: 11, color: "var(--text-tertiary)" }}>{m.role}</span>
                     </div>
-                    <span
-                      className="flex items-center gap-1"
-                      style={{ fontSize: 11, color: "var(--accent-green)", padding: "3px 8px", borderRadius: 6, backgroundColor: "var(--accent-green-light)" }}
-                    >
-                      <Check size={10} />
-                      已加入
-                    </span>
+                    {m.joined ? (
+                      <span
+                        className="flex items-center gap-1"
+                        style={{ fontSize: 11, color: "var(--accent-green)", padding: "4px 10px", borderRadius: 8, backgroundColor: "var(--accent-green-light)" }}
+                      >
+                        <Check size={10} />
+                        已加入
+                      </span>
+                    ) : (
+                      <button
+                        className="flex items-center justify-center gap-1"
+                        style={{ height: 30, padding: "0 14px", borderRadius: 15, backgroundColor: "var(--accent-green)", border: "none", cursor: "pointer", color: "#fff", fontSize: 12, fontWeight: 600 }}
+                      >
+                        <UserPlus size={12} />
+                        邀请
+                      </button>
+                    )}
                   </div>
                 ))}
               </div>
 
-              {/* Invite new member */}
-              <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-secondary)", display: "block", marginBottom: 10 }}>邀请更多家人</span>
-
-              {/* Invite cards */}
-              <div className="flex flex-col gap-3" style={{ marginBottom: 20 }}>
-                {[
-                  { name: "妈妈", desc: "补充爸爸的故事，提供不同视角", avatar: "妈", bg: "var(--accent-coral)" },
-                  { name: "大姐", desc: "回忆童年往事、家庭趣事", avatar: "姐", bg: "var(--accent-warm)" },
-                ].map((m, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-3"
-                    style={{
-                      padding: "12px 14px",
-                      borderRadius: 14,
-                      backgroundColor: "var(--bg-surface)",
-                      border: "1px solid var(--border-subtle)",
-                    }}
-                  >
-                    <div
-                      className="flex items-center justify-center shrink-0"
-                      style={{ width: 38, height: 38, borderRadius: 19, backgroundColor: m.bg, color: "#fff", fontSize: 14, fontWeight: 600, opacity: 0.7 }}
-                    >
-                      {m.avatar}
-                    </div>
-                    <div className="flex-1">
-                      <span style={{ fontSize: 14, fontWeight: 500, color: "var(--text-primary)", display: "block" }}>{m.name}</span>
-                      <span style={{ fontSize: 11, color: "var(--text-tertiary)", lineHeight: 1.4 }}>{m.desc}</span>
-                    </div>
-                    <button
-                      className="flex items-center justify-center gap-1"
-                      style={{
-                        height: 30, padding: "0 12px", borderRadius: 15,
-                        backgroundColor: "var(--accent-green)", border: "none", cursor: "pointer",
-                        color: "#fff", fontSize: 12, fontWeight: 600, flexShrink: 0,
-                      }}
-                    >
-                      <UserPlus size={12} />
-                      邀请
-                    </button>
-                  </div>
-                ))}
-              </div>
+              {/* Divider */}
+              <div style={{ height: 1, backgroundColor: "var(--border-subtle)", marginBottom: 16 }} />
 
               {/* Share link */}
-              <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-secondary)", display: "block", marginBottom: 10 }}>或分享邀请链接</span>
               <div
                 className="flex items-center gap-2"
                 style={{
@@ -770,31 +699,19 @@ export default function OutlinePage() {
                 </button>
               </div>
 
-              {/* Share to WeChat/Moments */}
-              <div className="flex items-center gap-3">
-                <button
-                  className="flex items-center justify-center gap-2 flex-1"
-                  style={{
-                    height: 44, borderRadius: 12,
-                    backgroundColor: "#2DC100", border: "none", cursor: "pointer",
-                    color: "#fff", fontSize: 14, fontWeight: 600,
-                  }}
-                >
-                  <MessageCircle size={18} />
-                  发送到微信
-                </button>
-                <button
-                  className="flex items-center justify-center gap-2 flex-1"
-                  style={{
-                    height: 44, borderRadius: 12,
-                    backgroundColor: "var(--bg-surface)", border: "1.5px solid var(--border-strong)",
-                    cursor: "pointer", color: "var(--text-primary)", fontSize: 14, fontWeight: 600,
-                  }}
-                >
-                  <Globe size={18} />
-                  朋友圈
-                </button>
-              </div>
+              {/* Share button */}
+              <button
+                className="flex items-center justify-center gap-2"
+                style={{
+                  width: "100%",
+                  height: 48, borderRadius: 12,
+                  backgroundColor: "#2DC100", border: "none", cursor: "pointer",
+                  color: "#fff", fontSize: 15, fontWeight: 600,
+                }}
+              >
+                <MessageCircle size={18} />
+                发送到微信
+              </button>
             </div>
           </div>
         </div>
