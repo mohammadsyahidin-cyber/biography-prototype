@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
-import { ChevronLeft, Share2, BookOpen, Heart, List, X, Check, PenLine, Lock, MessageCircle, ThumbsUp, Copy, QrCode } from "lucide-react";
+import { ChevronLeft, Share2, BookOpen, Heart, List, X, Check, PenLine, Lock, MessageCircle, ThumbsUp, Copy, QrCode, Globe } from "lucide-react";
 
 type SectionStatus = "done" | "draft" | "todo";
 type Section = { title: string; status: SectionStatus };
@@ -331,116 +331,117 @@ export default function ArticleFinalPage() {
 
       {/* Share Modal */}
       {showShare && (
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            zIndex: 50,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "rgba(0,0,0,0.7)",
-            overflow: "auto",
-            padding: "24px 0",
-          }}
-        >
-          <div onClick={() => setShowShare(false)} style={{ position: "absolute", inset: 0, zIndex: 0 }} />
-
-          {/* Poster Card */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 50 }}>
+          {/* Solid backdrop */}
+          <div
+            onClick={() => setShowShare(false)}
+            style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.88)" }}
+          />
+          {/* Scrollable content wrapper */}
           <div
             style={{
               position: "relative",
-              width: 300,
-              borderRadius: 20,
-              overflow: "hidden",
-              backgroundColor: "#FFFDF8",
-              boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
+              zIndex: 1,
+              width: "100%",
+              height: "100%",
+              overflow: "auto",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            {/* Card header with bg */}
-            <div style={{ position: "relative", height: 120, background: "linear-gradient(135deg, #5A4123 0%, #3C2D19 100%)", padding: "24px 24px 0", overflow: "hidden" }}>
-              <img src="/biography-prototype/images/card-bg.jpg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.3 }} />
-              <div style={{ position: "relative" }}>
-                <p className="font-outfit" style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", letterSpacing: 1, marginBottom: 6 }}>家族传记 · 父亲的岁月</p>
-                <h3 className="font-serif-sc" style={{ fontSize: 20, fontWeight: 700, color: "#fff", lineHeight: 1.3 }}>清水河边的少年时光</h3>
-              </div>
-            </div>
+            <div style={{ margin: "auto 0", display: "flex", flexDirection: "column", alignItems: "center", padding: "24px 0", flexShrink: 0 }}>
 
-            {/* Card body */}
-            <div style={{ padding: "16px 24px 20px" }}>
-              {/* Excerpt */}
-              <p className="font-serif-sc" style={{ fontSize: 14, lineHeight: 1.9, color: "var(--text-secondary)", marginBottom: 4 }}>
-                小时候，家门口不远处就是清水河。每到夏天，建国和三个兄弟结伴去河边摸鱼，赤着脚踩进凉丝丝的河水里，那是最快乐的时光。
-              </p>
-              <p className="font-serif-sc" style={{ fontSize: 14, lineHeight: 1.9, color: "var(--text-secondary)", marginBottom: 16 }}>
-                那条清水河，不只是一条河，更是一家人童年记忆里最温暖的地方。
-              </p>
-
-              {/* Divider */}
-              <div className="flex items-center gap-3" style={{ marginBottom: 16 }}>
-                <div style={{ flex: 1, height: 1, backgroundColor: "var(--border-subtle)" }} />
-                <BookOpen size={12} style={{ color: "var(--accent-green)", opacity: 0.5 }} />
-                <div style={{ flex: 1, height: 1, backgroundColor: "var(--border-subtle)" }} />
-              </div>
-
-              {/* Bottom: contributors + QR */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center" style={{ marginRight: -4 }}>
-                    <div className="flex items-center justify-center" style={{ width: 26, height: 26, borderRadius: 13, backgroundColor: "var(--accent-coral)", color: "#fff", fontSize: 10, fontWeight: 600, border: "2px solid #FFFDF8" }}>爸</div>
-                    <div className="flex items-center justify-center" style={{ width: 26, height: 26, borderRadius: 13, backgroundColor: "var(--accent-coral)", color: "#fff", fontSize: 10, fontWeight: 600, marginLeft: -8, border: "2px solid #FFFDF8" }}>妈</div>
-                    <div className="flex items-center justify-center" style={{ width: 26, height: 26, borderRadius: 13, backgroundColor: "var(--accent-green)", color: "#fff", fontSize: 10, fontWeight: 600, marginLeft: -8, border: "2px solid #FFFDF8" }}>明</div>
-                  </div>
-                  <div>
-                    <span className="font-outfit" style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", display: "block" }}>3人共同讲述</span>
-                    <span className="font-outfit" style={{ fontSize: 10, color: "var(--text-tertiary)" }}>家族传记 · 父亲的岁月</span>
+              {/* Poster Card */}
+              <div
+                style={{
+                  width: 300,
+                  borderRadius: 20,
+                  overflow: "hidden",
+                  backgroundColor: "#FFFDF8",
+                  boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
+                  flexShrink: 0,
+                }}
+              >
+                {/* Card header with bg */}
+                <div style={{ position: "relative", height: 120, background: "linear-gradient(135deg, #5A4123 0%, #3C2D19 100%)", padding: "24px 24px 0", overflow: "hidden" }}>
+                  <img src="/biography-prototype/images/card-bg.jpg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.3 }} />
+                  <div style={{ position: "relative" }}>
+                    <p className="font-outfit" style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", letterSpacing: 1, marginBottom: 6 }}>家族传记 · 父亲的岁月</p>
+                    <h3 className="font-serif-sc" style={{ fontSize: 20, fontWeight: 700, color: "#fff", lineHeight: 1.3 }}>清水河边的少年时光</h3>
                   </div>
                 </div>
-                {/* QR code area */}
-                <div className="flex flex-col items-center gap-1">
-                  <div style={{ width: 52, height: 52, borderRadius: 10, backgroundColor: "#fff", border: "1.5px solid var(--border-subtle)", display: "flex", alignItems: "center", justifyContent: "center", padding: 4 }}>
-                    <div style={{ width: "100%", height: "100%", borderRadius: 6, backgroundColor: "var(--bg-muted)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <QrCode size={22} style={{ color: "var(--accent-green)" }} />
+
+                {/* Card body */}
+                <div style={{ padding: "16px 24px 20px" }}>
+                  <p className="font-serif-sc" style={{ fontSize: 14, lineHeight: 1.9, color: "var(--text-secondary)", marginBottom: 4 }}>
+                    小时候，家门口不远处就是清水河。每到夏天，建国和三个兄弟结伴去河边摸鱼，赤着脚踩进凉丝丝的河水里，那是最快乐的时光。
+                  </p>
+                  <p className="font-serif-sc" style={{ fontSize: 14, lineHeight: 1.9, color: "var(--text-secondary)", marginBottom: 16 }}>
+                    那条清水河，不只是一条河，更是一家人童年记忆里最温暖的地方。
+                  </p>
+
+                  <div className="flex items-center gap-3" style={{ marginBottom: 16 }}>
+                    <div style={{ flex: 1, height: 1, backgroundColor: "var(--border-subtle)" }} />
+                    <BookOpen size={12} style={{ color: "var(--accent-green)", opacity: 0.5 }} />
+                    <div style={{ flex: 1, height: 1, backgroundColor: "var(--border-subtle)" }} />
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center" style={{ marginRight: -4 }}>
+                        <div className="flex items-center justify-center" style={{ width: 26, height: 26, borderRadius: 13, backgroundColor: "var(--accent-coral)", color: "#fff", fontSize: 10, fontWeight: 600, border: "2px solid #FFFDF8" }}>爸</div>
+                        <div className="flex items-center justify-center" style={{ width: 26, height: 26, borderRadius: 13, backgroundColor: "var(--accent-coral)", color: "#fff", fontSize: 10, fontWeight: 600, marginLeft: -8, border: "2px solid #FFFDF8" }}>妈</div>
+                        <div className="flex items-center justify-center" style={{ width: 26, height: 26, borderRadius: 13, backgroundColor: "var(--accent-green)", color: "#fff", fontSize: 10, fontWeight: 600, marginLeft: -8, border: "2px solid #FFFDF8" }}>明</div>
+                      </div>
+                      <div>
+                        <span className="font-outfit" style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", display: "block" }}>3人共同讲述</span>
+                        <span className="font-outfit" style={{ fontSize: 10, color: "var(--text-tertiary)" }}>家族传记 · 父亲的岁月</span>
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center gap-1">
+                      <div style={{ width: 52, height: 52, borderRadius: 10, backgroundColor: "#fff", border: "1.5px solid var(--border-subtle)", display: "flex", alignItems: "center", justifyContent: "center", padding: 4 }}>
+                        <div style={{ width: "100%", height: "100%", borderRadius: 6, backgroundColor: "var(--bg-muted)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <QrCode size={22} style={{ color: "var(--accent-green)" }} />
+                        </div>
+                      </div>
+                      <span className="font-outfit" style={{ fontSize: 9, color: "var(--text-tertiary)", letterSpacing: 0.5 }}>扫码阅读</span>
                     </div>
                   </div>
-                  <span className="font-outfit" style={{ fontSize: 9, color: "var(--text-tertiary)", letterSpacing: 0.5 }}>扫码阅读</span>
                 </div>
               </div>
+
+              {/* Action buttons */}
+              <div className="flex items-center gap-4 font-outfit" style={{ marginTop: 24, flexShrink: 0 }}>
+                <button className="flex flex-col items-center gap-1.5" style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}>
+                  <div className="flex items-center justify-center" style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: "#2DC100" }}>
+                    <MessageCircle size={22} style={{ color: "#fff" }} />
+                  </div>
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.6)" }}>微信</span>
+                </button>
+                <button className="flex flex-col items-center gap-1.5" style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}>
+                  <div className="flex items-center justify-center" style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: "#2DC100" }}>
+                    <Globe size={22} style={{ color: "#fff" }} />
+                  </div>
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.6)" }}>朋友圈</span>
+                </button>
+                <button className="flex items-center justify-center gap-2" style={{ height: 48, padding: "0 28px", borderRadius: 24, backgroundColor: "var(--accent-green)", border: "none", cursor: "pointer", color: "#fff", fontSize: 14, fontWeight: 600 }}>
+                  <Copy size={16} />
+                  保存图片
+                </button>
+              </div>
+
+              {/* Close button */}
+              <button
+                onClick={() => setShowShare(false)}
+                className="flex items-center justify-center"
+                style={{ marginTop: 24, width: 40, height: 40, borderRadius: 20, backgroundColor: "rgba(255,255,255,0.12)", border: "none", cursor: "pointer", flexShrink: 0 }}
+              >
+                <X size={18} style={{ color: "rgba(255,255,255,0.6)" }} />
+              </button>
+
             </div>
           </div>
-
-          {/* Action buttons below card */}
-          <div className="flex items-center gap-4 font-outfit" style={{ position: "relative", marginTop: 24 }}>
-            {[
-              { icon: "💬", label: "微信" },
-              { icon: "👥", label: "朋友圈" },
-              { label: "保存图片", isMain: true },
-            ].map((item, i) => (
-              item.isMain ? (
-                <button key={i} className="flex items-center justify-center gap-2" style={{ height: 44, padding: "0 24px", borderRadius: 22, backgroundColor: "var(--accent-green)", border: "none", cursor: "pointer", color: "#fff", fontSize: 14, fontWeight: 600 }}>
-                  <Copy size={16} />
-                  {item.label}
-                </button>
-              ) : (
-                <button key={i} className="flex flex-col items-center gap-1" style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}>
-                  <div className="flex items-center justify-center" style={{ width: 44, height: 44, borderRadius: 22, backgroundColor: "rgba(255,255,255,0.15)" }}>
-                    <span style={{ fontSize: 22 }}>{item.icon}</span>
-                  </div>
-                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.7)" }}>{item.label}</span>
-                </button>
-              )
-            ))}
-          </div>
-
-          {/* Close button */}
-          <button
-            onClick={() => setShowShare(false)}
-            className="flex items-center justify-center"
-            style={{ position: "relative", marginTop: 20, width: 36, height: 36, borderRadius: 18, backgroundColor: "rgba(255,255,255,0.15)", border: "none", cursor: "pointer" }}
-          >
-            <X size={18} style={{ color: "rgba(255,255,255,0.7)" }} />
-          </button>
         </div>
       )}
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
-import { ChevronLeft, Share2, Flame, X, Copy, QrCode } from "lucide-react";
+import { ChevronLeft, Share2, Flame, X, Copy, QrCode, MessageCircle, Globe } from "lucide-react";
 
 export default function MemorialPage() {
   const [showShare, setShowShare] = useState(false);
@@ -444,118 +444,121 @@ export default function MemorialPage() {
 
       {/* Memorial Share Modal */}
       {showShare && (
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            zIndex: 50,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "rgba(0,0,0,0.85)",
-            overflow: "auto",
-            padding: "24px 0",
-          }}
-        >
-          <div onClick={() => setShowShare(false)} style={{ position: "absolute", inset: 0, zIndex: 0 }} />
-
-          {/* Memorial Poster Card */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 50 }}>
+          {/* Solid backdrop */}
+          <div
+            onClick={() => setShowShare(false)}
+            style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.92)" }}
+          />
+          {/* Scrollable content wrapper */}
           <div
             style={{
               position: "relative",
               zIndex: 1,
-              width: 300,
-              borderRadius: 20,
-              overflow: "hidden",
-              backgroundColor: "#1A1612",
-              boxShadow: "0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,160,96,0.15)",
-              flexShrink: 0,
+              width: "100%",
+              height: "100%",
+              overflow: "auto",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            {/* Card top with photo */}
-            <div style={{ position: "relative", height: 160, overflow: "hidden" }}>
-              <img src="/biography-prototype/images/card-bg.jpg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.4 }} />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 30%, #1A1612 100%)" }} />
-              <div style={{ position: "absolute", bottom: 20, left: 0, right: 0, textAlign: "center" }}>
-                <Flame size={20} fill="rgba(200,160,96,0.6)" style={{ color: "rgba(200,160,96,0.6)", margin: "0 auto 8px" }} />
-                <h3 className="font-serif-sc" style={{ fontSize: 24, fontWeight: 700, color: "rgba(200,160,96,0.9)" }}>李建国</h3>
-              </div>
-            </div>
+            {/* Auto-margin centering trick */}
+            <div style={{ margin: "auto 0", display: "flex", flexDirection: "column", alignItems: "center", padding: "24px 0", flexShrink: 0 }}>
 
-            {/* Life span */}
-            <div style={{ textAlign: "center", padding: "4px 24px 16px" }}>
-              <p className="font-outfit" style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", letterSpacing: 2 }}>1952 — 2024</p>
-            </div>
-
-            {/* Quote */}
-            <div style={{ padding: "0 28px 20px", textAlign: "center" }}>
-              <div style={{ height: 1, backgroundColor: "rgba(200,160,96,0.12)", marginBottom: 16 }} />
-              <p className="font-serif-sc" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(200,160,96,0.7)", fontStyle: "italic" }}>
-                "做人要踏实，走过的路都算数。"
-              </p>
-              <p className="font-outfit" style={{ fontSize: 11, color: "rgba(255,255,255,0.25)", marginTop: 6, marginBottom: 14 }}>—— 父亲常说的话</p>
-              <p className="font-serif-sc" style={{ fontSize: 12, lineHeight: 1.8, color: "rgba(255,255,255,0.4)" }}>
-                从清水河边的少年，到工厂里的青年，再到儿孙满堂的老人。他的故事，是一个时代的缩影，更是一个家族的温暖记忆。
-              </p>
-            </div>
-
-            {/* Bottom with stats + QR */}
-            <div style={{ padding: "0 24px 24px" }}>
-              <div style={{ height: 1, backgroundColor: "rgba(200,160,96,0.08)", marginBottom: 16 }} />
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-outfit" style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", marginBottom: 6 }}>一生的故事，都在这里</p>
-                  <div className="flex items-center gap-3 font-outfit">
-                    <span style={{ fontSize: 12, color: "rgba(200,160,96,0.6)" }}>5章节</span>
-                    <span style={{ fontSize: 12, color: "rgba(200,160,96,0.6)" }}>13故事</span>
-                    <span style={{ fontSize: 12, color: "rgba(200,160,96,0.6)" }}>3家人</span>
+              {/* Memorial Poster Card */}
+              <div
+                style={{
+                  width: 300,
+                  borderRadius: 20,
+                  overflow: "hidden",
+                  backgroundColor: "#1A1612",
+                  boxShadow: "0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,160,96,0.15)",
+                  flexShrink: 0,
+                }}
+              >
+                {/* Card top with photo */}
+                <div style={{ position: "relative", height: 160, overflow: "hidden" }}>
+                  <img src="/biography-prototype/images/card-bg.jpg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.4 }} />
+                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 30%, #1A1612 100%)" }} />
+                  <div style={{ position: "absolute", bottom: 20, left: 0, right: 0, textAlign: "center" }}>
+                    <Flame size={20} fill="rgba(200,160,96,0.6)" style={{ color: "rgba(200,160,96,0.6)", margin: "0 auto 8px" }} />
+                    <h3 className="font-serif-sc" style={{ fontSize: 24, fontWeight: 700, color: "rgba(200,160,96,0.9)" }}>李建国</h3>
                   </div>
                 </div>
-                {/* QR code area */}
-                <div className="flex flex-col items-center gap-1">
-                  <div style={{ width: 52, height: 52, borderRadius: 10, backgroundColor: "rgba(255,255,255,0.9)", display: "flex", alignItems: "center", justifyContent: "center", padding: 4 }}>
-                    <div style={{ width: "100%", height: "100%", borderRadius: 6, backgroundColor: "rgba(200,160,96,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <QrCode size={22} style={{ color: "rgba(200,160,96,0.7)" }} />
+
+                {/* Life span */}
+                <div style={{ textAlign: "center", padding: "4px 24px 16px" }}>
+                  <p className="font-outfit" style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", letterSpacing: 2 }}>1952 — 2024</p>
+                </div>
+
+                {/* Quote */}
+                <div style={{ padding: "0 28px 20px", textAlign: "center" }}>
+                  <div style={{ height: 1, backgroundColor: "rgba(200,160,96,0.12)", marginBottom: 16 }} />
+                  <p className="font-serif-sc" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(200,160,96,0.7)", fontStyle: "italic" }}>
+                    "做人要踏实，走过的路都算数。"
+                  </p>
+                  <p className="font-outfit" style={{ fontSize: 11, color: "rgba(255,255,255,0.25)", marginTop: 6, marginBottom: 14 }}>—— 父亲常说的话</p>
+                  <p className="font-serif-sc" style={{ fontSize: 12, lineHeight: 1.8, color: "rgba(255,255,255,0.4)" }}>
+                    从清水河边的少年，到工厂里的青年，再到儿孙满堂的老人。他的故事，是一个时代的缩影，更是一个家族的温暖记忆。
+                  </p>
+                </div>
+
+                {/* Bottom with stats + QR */}
+                <div style={{ padding: "0 24px 24px" }}>
+                  <div style={{ height: 1, backgroundColor: "rgba(200,160,96,0.08)", marginBottom: 16 }} />
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-outfit" style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", marginBottom: 6 }}>一生的故事，都在这里</p>
+                      <div className="flex items-center gap-3 font-outfit">
+                        <span style={{ fontSize: 12, color: "rgba(200,160,96,0.6)" }}>5章节</span>
+                        <span style={{ fontSize: 12, color: "rgba(200,160,96,0.6)" }}>13故事</span>
+                        <span style={{ fontSize: 12, color: "rgba(200,160,96,0.6)" }}>3家人</span>
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center gap-1">
+                      <div style={{ width: 52, height: 52, borderRadius: 10, backgroundColor: "rgba(255,255,255,0.9)", display: "flex", alignItems: "center", justifyContent: "center", padding: 4 }}>
+                        <div style={{ width: "100%", height: "100%", borderRadius: 6, backgroundColor: "rgba(200,160,96,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <QrCode size={22} style={{ color: "rgba(200,160,96,0.7)" }} />
+                        </div>
+                      </div>
+                      <span className="font-outfit" style={{ fontSize: 9, color: "rgba(255,255,255,0.3)", letterSpacing: 0.5 }}>扫码追忆</span>
                     </div>
                   </div>
-                  <span className="font-outfit" style={{ fontSize: 9, color: "rgba(255,255,255,0.3)", letterSpacing: 0.5 }}>扫码追忆</span>
                 </div>
               </div>
+
+              {/* Action buttons */}
+              <div className="flex items-center gap-4 font-outfit" style={{ marginTop: 24, flexShrink: 0 }}>
+                <button className="flex flex-col items-center gap-1.5" style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}>
+                  <div className="flex items-center justify-center" style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: "#2DC100" }}>
+                    <MessageCircle size={22} style={{ color: "#fff" }} />
+                  </div>
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.6)" }}>微信</span>
+                </button>
+                <button className="flex flex-col items-center gap-1.5" style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}>
+                  <div className="flex items-center justify-center" style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: "#2DC100" }}>
+                    <Globe size={22} style={{ color: "#fff" }} />
+                  </div>
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.6)" }}>朋友圈</span>
+                </button>
+                <button className="flex items-center justify-center gap-2" style={{ height: 48, padding: "0 28px", borderRadius: 24, backgroundColor: "rgba(200,160,96,0.9)", border: "none", cursor: "pointer", color: "#1A1612", fontSize: 14, fontWeight: 600 }}>
+                  <Copy size={16} />
+                  保存图片
+                </button>
+              </div>
+
+              {/* Close */}
+              <button
+                onClick={() => setShowShare(false)}
+                className="flex items-center justify-center"
+                style={{ marginTop: 24, width: 40, height: 40, borderRadius: 20, backgroundColor: "rgba(255,255,255,0.12)", border: "none", cursor: "pointer", flexShrink: 0 }}
+              >
+                <X size={18} style={{ color: "rgba(255,255,255,0.6)" }} />
+              </button>
+
             </div>
           </div>
-
-          {/* Action buttons */}
-          <div className="flex items-center gap-4 font-outfit" style={{ position: "relative", zIndex: 1, marginTop: 24, flexShrink: 0 }}>
-            {[
-              { icon: "💬", label: "微信" },
-              { icon: "👥", label: "朋友圈" },
-              { label: "保存图片", isMain: true },
-            ].map((item, i) => (
-              item.isMain ? (
-                <button key={i} className="flex items-center justify-center gap-2" style={{ height: 44, padding: "0 24px", borderRadius: 22, backgroundColor: "rgba(200,160,96,0.9)", border: "none", cursor: "pointer", color: "#1A1612", fontSize: 14, fontWeight: 600 }}>
-                  <Copy size={16} />
-                  {item.label}
-                </button>
-              ) : (
-                <button key={i} className="flex flex-col items-center gap-1" style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}>
-                  <div className="flex items-center justify-center" style={{ width: 44, height: 44, borderRadius: 22, backgroundColor: "rgba(255,255,255,0.1)" }}>
-                    <span style={{ fontSize: 22 }}>{item.icon}</span>
-                  </div>
-                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.5)" }}>{item.label}</span>
-                </button>
-              )
-            ))}
-          </div>
-
-          {/* Close */}
-          <button
-            onClick={() => setShowShare(false)}
-            className="flex items-center justify-center"
-            style={{ position: "relative", zIndex: 1, marginTop: 20, width: 36, height: 36, borderRadius: 18, backgroundColor: "rgba(255,255,255,0.1)", border: "none", cursor: "pointer", flexShrink: 0 }}
-          >
-            <X size={18} style={{ color: "rgba(255,255,255,0.5)" }} />
-          </button>
         </div>
       )}
     </PhoneFrame>

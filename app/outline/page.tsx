@@ -16,6 +16,8 @@ import {
   Trash2,
   ArrowUp,
   ArrowDown,
+  BookOpen,
+  FileText,
 } from "lucide-react";
 
 interface Section {
@@ -87,7 +89,14 @@ let chapterCounter = 6;
 export default function OutlinePage() {
   const router = useRouter();
   const [chapters, setChapters] = useState<Chapter[]>(initialChapters);
-  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set(["c1"]));
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(
+    new Set(["c1", "c2"])
+  );
+
+  const totalSections = chapters.reduce(
+    (sum, ch) => sum + ch.sections.length,
+    0
+  );
 
   const toggleExpand = (id: string) => {
     setExpandedIds((prev) => {
@@ -118,7 +127,10 @@ export default function OutlinePage() {
     setChapters((prev) =>
       prev.map((ch) =>
         ch.id === chapterId
-          ? { ...ch, sections: ch.sections.filter((s) => s.id !== sectionId) }
+          ? {
+              ...ch,
+              sections: ch.sections.filter((s) => s.id !== sectionId),
+            }
           : ch
       )
     );
@@ -176,7 +188,7 @@ export default function OutlinePage() {
     <PhoneFrame>
       <StatusBar />
       <BackHeader
-        title="生成大纲"
+        title="传记大纲"
         rightAction={
           <button
             className="flex items-center justify-center"
@@ -199,36 +211,71 @@ export default function OutlinePage() {
         style={{ backgroundColor: "var(--bg-page)" }}
       >
         <div style={{ padding: "0 20px 24px" }}>
-          {/* hint banner */}
+          {/* Stats overview */}
+          <div
+            className="flex items-center justify-between"
+            style={{
+              padding: "14px 18px",
+              borderRadius: 14,
+              backgroundColor: "var(--bg-card)",
+              border: "1px solid var(--border-subtle)",
+              marginBottom: 16,
+            }}
+          >
+            <div className="flex items-center gap-3">
+              <div
+                className="flex items-center justify-center"
+                style={{
+                  width: 38,
+                  height: 38,
+                  borderRadius: 12,
+                  backgroundColor: "var(--accent-green-light)",
+                }}
+              >
+                <BookOpen size={18} style={{ color: "var(--accent-green)" }} />
+              </div>
+              <div>
+                <span style={{ fontSize: 15, fontWeight: 700, color: "var(--text-primary)", display: "block" }}>
+                  父亲的岁月
+                </span>
+                <span style={{ fontSize: 12, color: "var(--text-tertiary)" }}>
+                  李建国 · 自传
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="flex flex-col items-center">
+                <span style={{ fontSize: 18, fontWeight: 700, color: "var(--accent-green)" }}>{chapters.length}</span>
+                <span style={{ fontSize: 10, color: "var(--text-tertiary)" }}>章</span>
+              </div>
+              <div style={{ width: 1, height: 24, backgroundColor: "var(--border-subtle)" }} />
+              <div className="flex flex-col items-center">
+                <span style={{ fontSize: 18, fontWeight: 700, color: "var(--accent-green)" }}>{totalSections}</span>
+                <span style={{ fontSize: 10, color: "var(--text-tertiary)" }}>节</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Hint banner */}
           <div
             className="flex items-start gap-2"
             style={{
-              padding: "12px 14px",
-              borderRadius: 12,
+              padding: "10px 14px",
+              borderRadius: 10,
               backgroundColor: "var(--accent-green-light)",
-              marginBottom: 20,
+              marginBottom: 16,
             }}
           >
             <Lightbulb
-              size={16}
-              style={{
-                color: "var(--accent-green)",
-                marginTop: 2,
-                flexShrink: 0,
-              }}
+              size={14}
+              style={{ color: "var(--accent-green)", marginTop: 2, flexShrink: 0 }}
             />
-            <p
-              style={{
-                fontSize: 13,
-                lineHeight: 1.5,
-                color: "var(--accent-green)",
-              }}
-            >
-              点击章节展开小节，可增删、拖拽调整顺序
+            <p style={{ fontSize: 12, lineHeight: 1.5, color: "var(--accent-green)" }}>
+              点击章节展开小节，可增删、调整顺序
             </p>
           </div>
 
-          {/* chapters */}
+          {/* Chapters list */}
           <div className="flex flex-col gap-3">
             {chapters.map((ch, chIdx) => {
               const isExpanded = expandedIds.has(ch.id);
@@ -237,8 +284,8 @@ export default function OutlinePage() {
                   key={ch.id}
                   style={{
                     backgroundColor: "var(--bg-card)",
-                    borderRadius: 14,
-                    border: `1px solid ${isExpanded ? "var(--accent-green)" : "var(--border-subtle)"}`,
+                    borderRadius: 16,
+                    border: `1.5px solid ${isExpanded ? "var(--accent-green)" : "var(--border-subtle)"}`,
                     overflow: "hidden",
                     transition: "border-color 0.2s",
                   }}
@@ -249,22 +296,23 @@ export default function OutlinePage() {
                     className="flex items-center gap-3"
                     style={{
                       width: "100%",
-                      padding: "14px 12px 14px 14px",
-                      background: "none",
+                      padding: "16px 14px 16px 16px",
+                      background: isExpanded ? "var(--accent-green-light)" : "none",
                       border: "none",
                       cursor: "pointer",
                       textAlign: "left",
+                      transition: "background 0.2s",
                     }}
                   >
                     <div
                       className="flex items-center justify-center shrink-0"
                       style={{
-                        width: 32,
-                        height: 32,
-                        borderRadius: 16,
+                        width: 34,
+                        height: 34,
+                        borderRadius: 10,
                         backgroundColor: "var(--accent-green)",
                         color: "var(--white)",
-                        fontSize: 14,
+                        fontSize: 15,
                         fontWeight: 700,
                       }}
                     >
@@ -292,188 +340,151 @@ export default function OutlinePage() {
                         {ch.sections.length} 个小节
                       </span>
                     </div>
-                    <div className="flex items-center gap-1">
-                      {isExpanded ? (
-                        <ChevronDown
-                          size={18}
-                          style={{ color: "var(--accent-green)" }}
-                        />
-                      ) : (
-                        <ChevronRight
-                          size={18}
-                          style={{ color: "var(--text-tertiary)" }}
-                        />
-                      )}
-                    </div>
+                    {isExpanded ? (
+                      <ChevronDown size={18} style={{ color: "var(--accent-green)" }} />
+                    ) : (
+                      <ChevronRight size={18} style={{ color: "var(--text-tertiary)" }} />
+                    )}
                   </button>
 
                   {/* Expanded sections */}
                   {isExpanded && (
-                    <div
-                      style={{
-                        borderTop: "1px solid var(--border-subtle)",
-                        padding: "8px 14px 10px",
-                      }}
-                    >
+                    <div style={{ padding: "4px 16px 12px" }}>
                       {ch.sections.map((sec, secIdx) => (
                         <div
                           key={sec.id}
-                          className="flex items-center gap-2"
-                          style={{
-                            padding: "10px 0",
-                            borderBottom:
-                              secIdx < ch.sections.length - 1
-                                ? "1px solid var(--border-subtle)"
-                                : "none",
-                          }}
+                          className="flex items-center"
+                          style={{ position: "relative" }}
                         >
-                          <GripVertical
-                            size={14}
-                            style={{
-                              color: "var(--text-tertiary)",
-                              flexShrink: 0,
-                            }}
-                          />
+                          {/* Timeline connector */}
                           <div
+                            className="flex flex-col items-center shrink-0"
+                            style={{ width: 28, alignSelf: "stretch" }}
+                          >
+                            <div
+                              style={{
+                                width: 1,
+                                height: 12,
+                                backgroundColor: secIdx === 0 ? "transparent" : "var(--border-subtle)",
+                              }}
+                            />
+                            <div
+                              className="flex items-center justify-center shrink-0"
+                              style={{
+                                width: 22,
+                                height: 22,
+                                borderRadius: 6,
+                                backgroundColor: "var(--accent-green-light)",
+                                fontSize: 10,
+                                fontWeight: 600,
+                                color: "var(--accent-green)",
+                              }}
+                            >
+                              {ch.num}.{secIdx + 1}
+                            </div>
+                            <div
+                              style={{
+                                width: 1,
+                                flex: 1,
+                                backgroundColor: secIdx === ch.sections.length - 1 ? "transparent" : "var(--border-subtle)",
+                              }}
+                            />
+                          </div>
+
+                          {/* Section content */}
+                          <div
+                            className="flex items-center flex-1 gap-2"
                             style={{
-                              width: 6,
-                              height: 6,
-                              borderRadius: 3,
-                              backgroundColor: "var(--accent-green)",
-                              opacity: 0.5,
-                              flexShrink: 0,
-                            }}
-                          />
-                          <span
-                            className="flex-1"
-                            style={{
-                              fontSize: 14,
-                              color: "var(--text-primary)",
+                              padding: "10px 8px 10px 10px",
+                              marginLeft: 6,
+                              borderRadius: 10,
+                              backgroundColor: "var(--bg-surface)",
+                              marginBottom: secIdx < ch.sections.length - 1 ? 4 : 0,
                             }}
                           >
-                            {sec.title}
-                          </span>
-                          <div className="flex items-center gap-1">
-                            <button
-                              onClick={() =>
-                                moveSection(ch.id, secIdx, "up")
-                              }
-                              style={{
-                                width: 24,
-                                height: 24,
-                                borderRadius: 6,
-                                border: "none",
-                                background: "none",
-                                cursor: "pointer",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                opacity: secIdx === 0 ? 0.25 : 1,
-                              }}
+                            <GripVertical
+                              size={14}
+                              style={{ color: "var(--border-strong)", flexShrink: 0 }}
+                            />
+                            <FileText
+                              size={14}
+                              style={{ color: "var(--accent-green)", opacity: 0.6, flexShrink: 0 }}
+                            />
+                            <span
+                              className="flex-1"
+                              style={{ fontSize: 14, fontWeight: 500, color: "var(--text-primary)" }}
                             >
-                              <ArrowUp
-                                size={13}
+                              {sec.title}
+                            </span>
+                            <div className="flex items-center gap-0.5">
+                              <button
+                                onClick={() => moveSection(ch.id, secIdx, "up")}
                                 style={{
-                                  color: "var(--text-tertiary)",
+                                  width: 24, height: 24, borderRadius: 6,
+                                  border: "none", background: "none", cursor: "pointer",
+                                  display: "flex", alignItems: "center", justifyContent: "center",
+                                  opacity: secIdx === 0 ? 0.2 : 1,
                                 }}
-                              />
-                            </button>
-                            <button
-                              onClick={() =>
-                                moveSection(ch.id, secIdx, "down")
-                              }
-                              style={{
-                                width: 24,
-                                height: 24,
-                                borderRadius: 6,
-                                border: "none",
-                                background: "none",
-                                cursor: "pointer",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                opacity:
-                                  secIdx === ch.sections.length - 1
-                                    ? 0.25
-                                    : 1,
-                              }}
-                            >
-                              <ArrowDown
-                                size={13}
+                              >
+                                <ArrowUp size={12} style={{ color: "var(--text-tertiary)" }} />
+                              </button>
+                              <button
+                                onClick={() => moveSection(ch.id, secIdx, "down")}
                                 style={{
-                                  color: "var(--text-tertiary)",
+                                  width: 24, height: 24, borderRadius: 6,
+                                  border: "none", background: "none", cursor: "pointer",
+                                  display: "flex", alignItems: "center", justifyContent: "center",
+                                  opacity: secIdx === ch.sections.length - 1 ? 0.2 : 1,
                                 }}
-                              />
-                            </button>
-                            <button
-                              onClick={() =>
-                                deleteSection(ch.id, sec.id)
-                              }
-                              style={{
-                                width: 24,
-                                height: 24,
-                                borderRadius: 6,
-                                border: "none",
-                                background: "none",
-                                cursor: "pointer",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                              }}
-                            >
-                              <Trash2
-                                size={13}
+                              >
+                                <ArrowDown size={12} style={{ color: "var(--text-tertiary)" }} />
+                              </button>
+                              <button
+                                onClick={() => deleteSection(ch.id, sec.id)}
                                 style={{
-                                  color: "var(--text-tertiary)",
+                                  width: 24, height: 24, borderRadius: 6,
+                                  border: "none", background: "none", cursor: "pointer",
+                                  display: "flex", alignItems: "center", justifyContent: "center",
                                 }}
-                              />
-                            </button>
+                              >
+                                <Trash2 size={12} style={{ color: "var(--text-tertiary)" }} />
+                              </button>
+                            </div>
                           </div>
                         </div>
                       ))}
 
                       {/* Add section */}
-                      <button
-                        onClick={() => addSection(ch.id)}
-                        className="flex items-center justify-center gap-1"
-                        style={{
-                          width: "100%",
-                          height: 36,
-                          marginTop: 6,
-                          borderRadius: 8,
-                          border: "1px dashed var(--border-subtle)",
-                          background: "none",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <Plus
-                          size={14}
-                          style={{ color: "var(--text-tertiary)" }}
-                        />
-                        <span
+                      <div className="flex items-center" style={{ marginTop: 4 }}>
+                        <div style={{ width: 28, flexShrink: 0 }} />
+                        <button
+                          onClick={() => addSection(ch.id)}
+                          className="flex items-center justify-center gap-1 flex-1"
                           style={{
-                            fontSize: 12,
-                            color: "var(--text-tertiary)",
+                            height: 34,
+                            marginLeft: 6,
+                            borderRadius: 10,
+                            border: "1.5px dashed var(--border-subtle)",
+                            background: "none",
+                            cursor: "pointer",
                           }}
                         >
-                          添加小节
-                        </span>
-                      </button>
+                          <Plus size={13} style={{ color: "var(--text-tertiary)" }} />
+                          <span style={{ fontSize: 12, color: "var(--text-tertiary)" }}>添加小节</span>
+                        </button>
+                      </div>
 
                       {/* Chapter actions */}
                       <div
                         className="flex items-center justify-between"
-                        style={{ marginTop: 8 }}
+                        style={{ marginTop: 10, padding: "8px 0 0", borderTop: "1px solid var(--border-subtle)" }}
                       >
                         <button
                           onClick={() => deleteChapter(ch.id)}
                           className="flex items-center gap-1"
                           style={{
-                            border: "none",
-                            background: "none",
-                            cursor: "pointer",
-                            fontSize: 12,
-                            color: "var(--text-tertiary)",
+                            border: "none", background: "none", cursor: "pointer",
+                            fontSize: 12, color: "var(--text-tertiary)",
                           }}
                         >
                           <Trash2 size={12} />
@@ -484,38 +495,25 @@ export default function OutlinePage() {
                             onClick={() => moveChapter(chIdx, "up")}
                             className="flex items-center justify-center"
                             style={{
-                              width: 28,
-                              height: 28,
-                              borderRadius: 6,
+                              width: 28, height: 28, borderRadius: 8,
                               backgroundColor: "var(--bg-muted)",
-                              border: "none",
-                              cursor: "pointer",
+                              border: "none", cursor: "pointer",
                               opacity: chIdx === 0 ? 0.3 : 1,
                             }}
                           >
-                            <ArrowUp
-                              size={14}
-                              style={{ color: "var(--text-secondary)" }}
-                            />
+                            <ArrowUp size={14} style={{ color: "var(--text-secondary)" }} />
                           </button>
                           <button
                             onClick={() => moveChapter(chIdx, "down")}
                             className="flex items-center justify-center"
                             style={{
-                              width: 28,
-                              height: 28,
-                              borderRadius: 6,
+                              width: 28, height: 28, borderRadius: 8,
                               backgroundColor: "var(--bg-muted)",
-                              border: "none",
-                              cursor: "pointer",
-                              opacity:
-                                chIdx === chapters.length - 1 ? 0.3 : 1,
+                              border: "none", cursor: "pointer",
+                              opacity: chIdx === chapters.length - 1 ? 0.3 : 1,
                             }}
                           >
-                            <ArrowDown
-                              size={14}
-                              style={{ color: "var(--text-secondary)" }}
-                            />
+                            <ArrowDown size={14} style={{ color: "var(--text-secondary)" }} />
                           </button>
                         </div>
                       </div>
@@ -526,7 +524,7 @@ export default function OutlinePage() {
             })}
           </div>
 
-          {/* add chapter button */}
+          {/* Add chapter button */}
           <button
             onClick={addChapter}
             className="flex items-center justify-center gap-2"
@@ -540,38 +538,26 @@ export default function OutlinePage() {
               cursor: "pointer",
             }}
           >
-            <Plus
-              size={18}
-              style={{ color: "var(--text-tertiary)" }}
-            />
-            <span
-              style={{ fontSize: 14, color: "var(--text-tertiary)" }}
-            >
+            <Plus size={18} style={{ color: "var(--text-tertiary)" }} />
+            <span style={{ fontSize: 14, color: "var(--text-tertiary)" }}>
               添加章节
             </span>
           </button>
         </div>
       </div>
 
-      {/* bottom buttons */}
+      {/* Bottom buttons */}
       <div
         className="shrink-0 flex gap-3 font-outfit"
-        style={{
-          padding: "12px 20px 28px",
-          backgroundColor: "var(--bg-page)",
-        }}
+        style={{ padding: "12px 20px 28px", backgroundColor: "var(--bg-page)" }}
       >
         <button
           onClick={() => router.push("/outline-chat")}
           style={{
-            flex: 1,
-            height: 48,
-            borderRadius: 12,
+            flex: 1, height: 48, borderRadius: 12,
             border: "1.5px solid var(--border-subtle)",
             backgroundColor: "var(--bg-card)",
-            fontSize: 15,
-            fontWeight: 600,
-            color: "var(--text-primary)",
+            fontSize: 15, fontWeight: 600, color: "var(--text-primary)",
             cursor: "pointer",
           }}
         >
@@ -581,13 +567,9 @@ export default function OutlinePage() {
           href="/outline-done"
           className="flex items-center justify-center"
           style={{
-            flex: 1,
-            height: 48,
-            borderRadius: 12,
+            flex: 1, height: 48, borderRadius: 12,
             backgroundColor: "var(--accent-green)",
-            color: "var(--white)",
-            fontSize: 15,
-            fontWeight: 600,
+            color: "var(--white)", fontSize: 15, fontWeight: 600,
           }}
         >
           确认大纲
