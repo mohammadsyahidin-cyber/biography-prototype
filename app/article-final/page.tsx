@@ -341,9 +341,11 @@ export default function ArticleFinalPage() {
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: "rgba(0,0,0,0.7)",
+            overflow: "auto",
+            padding: "24px 0",
           }}
         >
-          <div onClick={() => setShowShare(false)} style={{ position: "absolute", inset: 0 }} />
+          <div onClick={() => setShowShare(false)} style={{ position: "absolute", inset: 0, zIndex: 0 }} />
 
           {/* Poster Card */}
           <div

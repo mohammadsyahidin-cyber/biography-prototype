@@ -453,20 +453,24 @@ export default function MemorialPage() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "rgba(0,0,0,0.8)",
+            backgroundColor: "rgba(0,0,0,0.85)",
+            overflow: "auto",
+            padding: "24px 0",
           }}
         >
-          <div onClick={() => setShowShare(false)} style={{ position: "absolute", inset: 0 }} />
+          <div onClick={() => setShowShare(false)} style={{ position: "absolute", inset: 0, zIndex: 0 }} />
 
           {/* Memorial Poster Card */}
           <div
             style={{
               position: "relative",
+              zIndex: 1,
               width: 300,
               borderRadius: 20,
               overflow: "hidden",
               backgroundColor: "#1A1612",
               boxShadow: "0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,160,96,0.15)",
+              flexShrink: 0,
             }}
           >
             {/* Card top with photo */}
@@ -522,7 +526,7 @@ export default function MemorialPage() {
           </div>
 
           {/* Action buttons */}
-          <div className="flex items-center gap-4 font-outfit" style={{ position: "relative", marginTop: 24 }}>
+          <div className="flex items-center gap-4 font-outfit" style={{ position: "relative", zIndex: 1, marginTop: 24, flexShrink: 0 }}>
             {[
               { icon: "💬", label: "微信" },
               { icon: "👥", label: "朋友圈" },
@@ -548,7 +552,7 @@ export default function MemorialPage() {
           <button
             onClick={() => setShowShare(false)}
             className="flex items-center justify-center"
-            style={{ position: "relative", marginTop: 20, width: 36, height: 36, borderRadius: 18, backgroundColor: "rgba(255,255,255,0.1)", border: "none", cursor: "pointer" }}
+            style={{ position: "relative", zIndex: 1, marginTop: 20, width: 36, height: 36, borderRadius: 18, backgroundColor: "rgba(255,255,255,0.1)", border: "none", cursor: "pointer", flexShrink: 0 }}
           >
             <X size={18} style={{ color: "rgba(255,255,255,0.5)" }} />
           </button>
