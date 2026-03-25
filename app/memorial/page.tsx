@@ -489,31 +489,31 @@ export default function MemorialPage() {
 
                 {/* Life span */}
                 <div style={{ textAlign: "center", padding: "4px 24px 16px" }}>
-                  <p className="font-outfit" style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", letterSpacing: 2 }}>1952 — 2024</p>
+                  <p className="font-outfit" style={{ fontSize: 14, color: "rgba(255,255,255,0.55)", letterSpacing: 2 }}>1952 — 2024</p>
                 </div>
 
                 {/* Quote */}
                 <div style={{ padding: "0 28px 20px", textAlign: "center" }}>
-                  <div style={{ height: 1, backgroundColor: "rgba(200,160,96,0.12)", marginBottom: 16 }} />
-                  <p className="font-serif-sc" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(200,160,96,0.7)", fontStyle: "italic" }}>
+                  <div style={{ height: 1, backgroundColor: "rgba(200,160,96,0.2)", marginBottom: 16 }} />
+                  <p className="font-serif-sc" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(200,160,96,0.9)", fontStyle: "italic" }}>
                     "做人要踏实，走过的路都算数。"
                   </p>
-                  <p className="font-outfit" style={{ fontSize: 11, color: "rgba(255,255,255,0.25)", marginTop: 6, marginBottom: 14 }}>—— 父亲常说的话</p>
-                  <p className="font-serif-sc" style={{ fontSize: 12, lineHeight: 1.8, color: "rgba(255,255,255,0.4)" }}>
+                  <p className="font-outfit" style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginTop: 6, marginBottom: 14 }}>—— 父亲常说的话</p>
+                  <p className="font-serif-sc" style={{ fontSize: 12, lineHeight: 1.8, color: "rgba(255,255,255,0.6)" }}>
                     从清水河边的少年，到工厂里的青年，再到儿孙满堂的老人。他的故事，是一个时代的缩影，更是一个家族的温暖记忆。
                   </p>
                 </div>
 
                 {/* Bottom with stats + QR */}
                 <div style={{ padding: "0 24px 24px" }}>
-                  <div style={{ height: 1, backgroundColor: "rgba(200,160,96,0.08)", marginBottom: 16 }} />
+                  <div style={{ height: 1, backgroundColor: "rgba(200,160,96,0.15)", marginBottom: 16 }} />
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-outfit" style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", marginBottom: 6 }}>一生的故事，都在这里</p>
+                      <p className="font-outfit" style={{ fontSize: 11, color: "rgba(255,255,255,0.5)", marginBottom: 6 }}>一生的故事，都在这里</p>
                       <div className="flex items-center gap-3 font-outfit">
-                        <span style={{ fontSize: 12, color: "rgba(200,160,96,0.6)" }}>5章节</span>
-                        <span style={{ fontSize: 12, color: "rgba(200,160,96,0.6)" }}>13故事</span>
-                        <span style={{ fontSize: 12, color: "rgba(200,160,96,0.6)" }}>3家人</span>
+                        <span style={{ fontSize: 12, color: "rgba(200,160,96,0.8)" }}>5章节</span>
+                        <span style={{ fontSize: 12, color: "rgba(200,160,96,0.8)" }}>13故事</span>
+                        <span style={{ fontSize: 12, color: "rgba(200,160,96,0.8)" }}>3家人</span>
                       </div>
                     </div>
                     <div className="flex flex-col items-center gap-1">
@@ -522,7 +522,7 @@ export default function MemorialPage() {
                           <QrCode size={22} style={{ color: "rgba(200,160,96,0.7)" }} />
                         </div>
                       </div>
-                      <span className="font-outfit" style={{ fontSize: 9, color: "rgba(255,255,255,0.3)", letterSpacing: 0.5 }}>扫码追忆</span>
+                      <span className="font-outfit" style={{ fontSize: 9, color: "rgba(255,255,255,0.45)", letterSpacing: 0.5 }}>扫码追忆</span>
                     </div>
                   </div>
                 </div>
@@ -534,13 +534,13 @@ export default function MemorialPage() {
                   <div className="flex items-center justify-center" style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: "#2DC100" }}>
                     <MessageCircle size={22} style={{ color: "#fff" }} />
                   </div>
-                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.6)" }}>微信</span>
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.8)" }}>微信</span>
                 </button>
                 <button className="flex flex-col items-center gap-1.5" style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}>
                   <div className="flex items-center justify-center" style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: "#2DC100" }}>
                     <Globe size={22} style={{ color: "#fff" }} />
                   </div>
-                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.6)" }}>朋友圈</span>
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.8)" }}>朋友圈</span>
                 </button>
                 <button className="flex items-center justify-center gap-2" style={{ height: 48, padding: "0 28px", borderRadius: 24, backgroundColor: "rgba(200,160,96,0.9)", border: "none", cursor: "pointer", color: "#1A1612", fontSize: 14, fontWeight: 600 }}>
                   <Copy size={16} />
