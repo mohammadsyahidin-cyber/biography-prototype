@@ -338,77 +338,96 @@ export default function ArticleFinalPage() {
             zIndex: 50,
             display: "flex",
             flexDirection: "column",
-            justifyContent: "flex-end",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0,0,0,0.7)",
           }}
         >
-          <div onClick={() => setShowShare(false)} style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.45)" }} />
+          <div onClick={() => setShowShare(false)} style={{ position: "absolute", inset: 0 }} />
+
+          {/* Poster Card */}
           <div
-            className="font-outfit"
             style={{
               position: "relative",
-              backgroundColor: "var(--bg-card)",
-              borderRadius: "20px 20px 0 0",
-              padding: "0 24px 32px",
+              width: 300,
+              borderRadius: 20,
+              overflow: "hidden",
+              backgroundColor: "#FFFDF8",
+              boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
             }}
           >
-            {/* Handle */}
-            <div className="flex justify-center" style={{ padding: "10px 0 16px" }}>
-              <div style={{ width: 36, height: 4, borderRadius: 2, backgroundColor: "var(--border-subtle)" }} />
-            </div>
-
-            {/* Article preview card */}
-            <div className="flex gap-3" style={{ padding: "14px 16px", borderRadius: 14, backgroundColor: "var(--bg-surface)", border: "1px solid var(--border-subtle)", marginBottom: 24 }}>
-              <div style={{ width: 56, height: 56, borderRadius: 10, backgroundColor: "var(--accent-green-light)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <BookOpen size={24} style={{ color: "var(--accent-green)" }} />
-              </div>
-              <div className="flex-1 flex flex-col justify-center">
-                <p className="font-serif-sc" style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)", lineHeight: 1.3 }}>清水河边的少年时光</p>
-                <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 4 }}>第一章 · 童年生活 · 父亲的岁月</p>
+            {/* Card header with bg */}
+            <div style={{ position: "relative", height: 120, background: "linear-gradient(135deg, #5A4123 0%, #3C2D19 100%)", padding: "24px 24px 0", overflow: "hidden" }}>
+              <img src="/biography-prototype/images/card-bg.jpg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.3 }} />
+              <div style={{ position: "relative" }}>
+                <p className="font-outfit" style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", letterSpacing: 1, marginBottom: 6 }}>家族传记 · 父亲的岁月</p>
+                <h3 className="font-serif-sc" style={{ fontSize: 20, fontWeight: 700, color: "#fff", lineHeight: 1.3 }}>清水河边的少年时光</h3>
               </div>
             </div>
 
-            {/* Share options */}
-            <div className="flex items-center justify-around" style={{ marginBottom: 24 }}>
-              {[
-                { icon: "💬", label: "微信", bg: "#07C160" },
-                { icon: "👥", label: "朋友圈", bg: "#07C160" },
-                { icon: "QR", label: "二维码", bg: "var(--accent-warm)", isIcon: true },
-                { icon: "CP", label: "复制链接", bg: "var(--accent-green)", isIcon: true },
-              ].map((item, i) => (
-                <button key={i} className="flex flex-col items-center gap-2" style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}>
-                  <div className="flex items-center justify-center" style={{ width: 48, height: 48, borderRadius: 14, backgroundColor: item.bg }}>
-                    {item.isIcon && item.icon === "QR" ? (
-                      <QrCode size={22} style={{ color: "var(--white)" }} />
-                    ) : item.isIcon && item.icon === "CP" ? (
-                      <Copy size={22} style={{ color: "var(--white)" }} />
-                    ) : (
-                      <span style={{ fontSize: 24 }}>{item.icon}</span>
-                    )}
+            {/* Card body */}
+            <div style={{ padding: "16px 24px 20px" }}>
+              {/* Excerpt */}
+              <p className="font-serif-sc" style={{ fontSize: 13, lineHeight: 1.8, color: "var(--text-secondary)", marginBottom: 16 }}>
+                "那条清水河，不只是一条河，更是一家人童年记忆里最温暖的地方。"
+              </p>
+
+              {/* Divider */}
+              <div className="flex items-center gap-3" style={{ marginBottom: 16 }}>
+                <div style={{ flex: 1, height: 1, backgroundColor: "var(--border-subtle)" }} />
+                <BookOpen size={12} style={{ color: "var(--accent-green)", opacity: 0.5 }} />
+                <div style={{ flex: 1, height: 1, backgroundColor: "var(--border-subtle)" }} />
+              </div>
+
+              {/* Contributors */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center" style={{ marginRight: -4 }}>
+                    <div className="flex items-center justify-center" style={{ width: 24, height: 24, borderRadius: 12, backgroundColor: "var(--accent-coral)", color: "#fff", fontSize: 10, fontWeight: 600, border: "2px solid #FFFDF8" }}>爸</div>
+                    <div className="flex items-center justify-center" style={{ width: 24, height: 24, borderRadius: 12, backgroundColor: "var(--accent-coral)", color: "#fff", fontSize: 10, fontWeight: 600, marginLeft: -8, border: "2px solid #FFFDF8" }}>妈</div>
+                    <div className="flex items-center justify-center" style={{ width: 24, height: 24, borderRadius: 12, backgroundColor: "var(--accent-green)", color: "#fff", fontSize: 10, fontWeight: 600, marginLeft: -8, border: "2px solid #FFFDF8" }}>明</div>
                   </div>
-                  <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>{item.label}</span>
-                </button>
-              ))}
+                  <span className="font-outfit" style={{ fontSize: 11, color: "var(--text-tertiary)" }}>3人共同讲述</span>
+                </div>
+                {/* QR placeholder */}
+                <div style={{ width: 44, height: 44, borderRadius: 8, backgroundColor: "var(--bg-muted)", border: "1px solid var(--border-subtle)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <QrCode size={24} style={{ color: "var(--text-tertiary)" }} />
+                </div>
+              </div>
             </div>
-
-            {/* Cancel button */}
-            <button
-              onClick={() => setShowShare(false)}
-              className="flex items-center justify-center"
-              style={{
-                width: "100%",
-                height: 48,
-                borderRadius: 14,
-                backgroundColor: "var(--bg-muted)",
-                border: "none",
-                cursor: "pointer",
-                fontSize: 15,
-                fontWeight: 600,
-                color: "var(--text-secondary)",
-              }}
-            >
-              取消
-            </button>
           </div>
+
+          {/* Action buttons below card */}
+          <div className="flex items-center gap-4 font-outfit" style={{ position: "relative", marginTop: 24 }}>
+            {[
+              { icon: "💬", label: "微信" },
+              { icon: "👥", label: "朋友圈" },
+              { label: "保存图片", isMain: true },
+            ].map((item, i) => (
+              item.isMain ? (
+                <button key={i} className="flex items-center justify-center gap-2" style={{ height: 44, padding: "0 24px", borderRadius: 22, backgroundColor: "var(--accent-green)", border: "none", cursor: "pointer", color: "#fff", fontSize: 14, fontWeight: 600 }}>
+                  <Copy size={16} />
+                  {item.label}
+                </button>
+              ) : (
+                <button key={i} className="flex flex-col items-center gap-1" style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}>
+                  <div className="flex items-center justify-center" style={{ width: 44, height: 44, borderRadius: 22, backgroundColor: "rgba(255,255,255,0.15)" }}>
+                    <span style={{ fontSize: 22 }}>{item.icon}</span>
+                  </div>
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.7)" }}>{item.label}</span>
+                </button>
+              )
+            ))}
+          </div>
+
+          {/* Close button */}
+          <button
+            onClick={() => setShowShare(false)}
+            className="flex items-center justify-center"
+            style={{ position: "relative", marginTop: 20, width: 36, height: 36, borderRadius: 18, backgroundColor: "rgba(255,255,255,0.15)", border: "none", cursor: "pointer" }}
+          >
+            <X size={18} style={{ color: "rgba(255,255,255,0.7)" }} />
+          </button>
         </div>
       )}
 
