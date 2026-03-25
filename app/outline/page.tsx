@@ -18,6 +18,12 @@ import {
   ArrowDown,
   BookOpen,
   FileText,
+  X,
+  Copy,
+  UserPlus,
+  Check,
+  MessageCircle,
+  Globe,
 } from "lucide-react";
 
 interface Section {
@@ -92,6 +98,8 @@ export default function OutlinePage() {
   const [expandedIds, setExpandedIds] = useState<Set<string>>(
     new Set(["c1", "c2"])
   );
+  const [showShare, setShowShare] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const totalSections = chapters.reduce(
     (sum, ch) => sum + ch.sections.length,
@@ -191,12 +199,15 @@ export default function OutlinePage() {
         title="传记大纲"
         rightAction={
           <button
+            onClick={() => setShowShare(true)}
             className="flex items-center justify-center"
             style={{
               width: 36,
               height: 36,
               borderRadius: 18,
               backgroundColor: "var(--bg-muted)",
+              border: "none",
+              cursor: "pointer",
             }}
           >
             <Share2
@@ -575,6 +586,220 @@ export default function OutlinePage() {
           确认大纲
         </Link>
       </div>
+
+      {/* Share / Invite Modal */}
+      {showShare && (
+        <div style={{ position: "absolute", inset: 0, zIndex: 50 }}>
+          <div
+            onClick={() => setShowShare(false)}
+            style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.5)" }}
+          />
+          {/* Bottom sheet */}
+          <div
+            className="font-outfit"
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              backgroundColor: "var(--bg-card)",
+              borderRadius: "20px 20px 0 0",
+              maxHeight: "85%",
+              overflow: "auto",
+            }}
+          >
+            {/* Handle */}
+            <div className="flex justify-center" style={{ padding: "10px 0 0" }}>
+              <div style={{ width: 36, height: 4, borderRadius: 2, backgroundColor: "var(--border-subtle)" }} />
+            </div>
+
+            {/* Header */}
+            <div className="flex items-center justify-between" style={{ padding: "12px 20px 0" }}>
+              <div>
+                <span style={{ fontSize: 17, fontWeight: 700, color: "var(--text-primary)", display: "block" }}>邀请家人完善大纲</span>
+                <span style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 2, display: "block" }}>邀请家庭成员一起回忆、补充章节内容</span>
+              </div>
+              <button
+                onClick={() => setShowShare(false)}
+                className="flex items-center justify-center"
+                style={{ width: 32, height: 32, borderRadius: 16, backgroundColor: "var(--bg-muted)", border: "none", cursor: "pointer" }}
+              >
+                <X size={16} style={{ color: "var(--text-secondary)" }} />
+              </button>
+            </div>
+
+            <div style={{ padding: "16px 20px 28px" }}>
+              {/* Current outline summary */}
+              <div
+                style={{
+                  padding: "14px 16px",
+                  borderRadius: 14,
+                  backgroundColor: "var(--accent-green-light)",
+                  border: "1px solid var(--accent-green)",
+                  marginBottom: 20,
+                }}
+              >
+                <div className="flex items-center gap-3" style={{ marginBottom: 10 }}>
+                  <BookOpen size={16} style={{ color: "var(--accent-green)" }} />
+                  <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>《父亲的岁月》 大纲</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span style={{ fontSize: 12, color: "var(--accent-green)" }}>{chapters.length} 个章节</span>
+                  <span style={{ fontSize: 12, color: "var(--accent-green)" }}>{totalSections} 个小节</span>
+                </div>
+                <div className="flex flex-wrap gap-1.5" style={{ marginTop: 10 }}>
+                  {chapters.map((ch) => (
+                    <span
+                      key={ch.id}
+                      style={{
+                        fontSize: 11,
+                        padding: "3px 8px",
+                        borderRadius: 6,
+                        backgroundColor: "var(--bg-card)",
+                        color: "var(--text-secondary)",
+                        border: "1px solid var(--border-subtle)",
+                      }}
+                    >
+                      {ch.num}. {ch.title}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Already joined members */}
+              <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-secondary)", display: "block", marginBottom: 10 }}>已参与的家人</span>
+              <div className="flex flex-col gap-3" style={{ marginBottom: 20 }}>
+                {[
+                  { name: "小明（我）", role: "发起人", avatar: "明", bg: "var(--accent-green)", isMe: true },
+                  { name: "爸爸", role: "主讲人", avatar: "爸", bg: "var(--accent-coral)", isMe: false },
+                ].map((m, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div
+                      className="flex items-center justify-center shrink-0"
+                      style={{ width: 38, height: 38, borderRadius: 19, backgroundColor: m.bg, color: "#fff", fontSize: 14, fontWeight: 600 }}
+                    >
+                      {m.avatar}
+                    </div>
+                    <div className="flex-1">
+                      <span style={{ fontSize: 14, fontWeight: 500, color: "var(--text-primary)", display: "block" }}>{m.name}</span>
+                      <span style={{ fontSize: 11, color: "var(--text-tertiary)" }}>{m.role}</span>
+                    </div>
+                    <span
+                      className="flex items-center gap-1"
+                      style={{ fontSize: 11, color: "var(--accent-green)", padding: "3px 8px", borderRadius: 6, backgroundColor: "var(--accent-green-light)" }}
+                    >
+                      <Check size={10} />
+                      已加入
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Invite new member */}
+              <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-secondary)", display: "block", marginBottom: 10 }}>邀请更多家人</span>
+
+              {/* Invite cards */}
+              <div className="flex flex-col gap-3" style={{ marginBottom: 20 }}>
+                {[
+                  { name: "妈妈", desc: "补充爸爸的故事，提供不同视角", avatar: "妈", bg: "var(--accent-coral)" },
+                  { name: "大姐", desc: "回忆童年往事、家庭趣事", avatar: "姐", bg: "var(--accent-warm)" },
+                ].map((m, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-3"
+                    style={{
+                      padding: "12px 14px",
+                      borderRadius: 14,
+                      backgroundColor: "var(--bg-surface)",
+                      border: "1px solid var(--border-subtle)",
+                    }}
+                  >
+                    <div
+                      className="flex items-center justify-center shrink-0"
+                      style={{ width: 38, height: 38, borderRadius: 19, backgroundColor: m.bg, color: "#fff", fontSize: 14, fontWeight: 600, opacity: 0.7 }}
+                    >
+                      {m.avatar}
+                    </div>
+                    <div className="flex-1">
+                      <span style={{ fontSize: 14, fontWeight: 500, color: "var(--text-primary)", display: "block" }}>{m.name}</span>
+                      <span style={{ fontSize: 11, color: "var(--text-tertiary)", lineHeight: 1.4 }}>{m.desc}</span>
+                    </div>
+                    <button
+                      className="flex items-center justify-center gap-1"
+                      style={{
+                        height: 30, padding: "0 12px", borderRadius: 15,
+                        backgroundColor: "var(--accent-green)", border: "none", cursor: "pointer",
+                        color: "#fff", fontSize: 12, fontWeight: 600, flexShrink: 0,
+                      }}
+                    >
+                      <UserPlus size={12} />
+                      邀请
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              {/* Share link */}
+              <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-secondary)", display: "block", marginBottom: 10 }}>或分享邀请链接</span>
+              <div
+                className="flex items-center gap-2"
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: 12,
+                  backgroundColor: "var(--bg-surface)",
+                  border: "1px solid var(--border-subtle)",
+                  marginBottom: 16,
+                }}
+              >
+                <span className="flex-1" style={{ fontSize: 13, color: "var(--text-tertiary)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                  biography.app/invite/abc123
+                </span>
+                <button
+                  onClick={() => { setCopied(true); setTimeout(() => setCopied(false), 2000); }}
+                  className="flex items-center gap-1 shrink-0"
+                  style={{
+                    height: 28, padding: "0 10px", borderRadius: 8,
+                    backgroundColor: copied ? "var(--accent-green-light)" : "var(--bg-muted)",
+                    border: "none", cursor: "pointer",
+                    fontSize: 12, fontWeight: 500,
+                    color: copied ? "var(--accent-green)" : "var(--text-secondary)",
+                  }}
+                >
+                  {copied ? <Check size={12} /> : <Copy size={12} />}
+                  {copied ? "已复制" : "复制"}
+                </button>
+              </div>
+
+              {/* Share to WeChat/Moments */}
+              <div className="flex items-center gap-3">
+                <button
+                  className="flex items-center justify-center gap-2 flex-1"
+                  style={{
+                    height: 44, borderRadius: 12,
+                    backgroundColor: "#2DC100", border: "none", cursor: "pointer",
+                    color: "#fff", fontSize: 14, fontWeight: 600,
+                  }}
+                >
+                  <MessageCircle size={18} />
+                  发送到微信
+                </button>
+                <button
+                  className="flex items-center justify-center gap-2 flex-1"
+                  style={{
+                    height: 44, borderRadius: 12,
+                    backgroundColor: "var(--bg-surface)", border: "1.5px solid var(--border-strong)",
+                    cursor: "pointer", color: "var(--text-primary)", fontSize: 14, fontWeight: 600,
+                  }}
+                >
+                  <Globe size={18} />
+                  朋友圈
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
     </PhoneFrame>
   );
 }
