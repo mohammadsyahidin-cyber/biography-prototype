@@ -278,32 +278,60 @@ export default function MemorialPage() {
               backgroundColor: "rgba(200,160,96,0.08)",
               borderRadius: 16,
               border: "1px solid rgba(200,160,96,0.12)",
-              padding: "20px 24px",
+              padding: "24px 24px",
             }}
           >
+            {/* 人生格言 */}
             <p
               className="font-serif-sc"
               style={{
-                fontSize: 15,
-                lineHeight: 1.8,
-                color: "rgba(255,255,255,0.7)",
+                fontSize: 18,
+                lineHeight: 1.6,
+                color: "rgba(200,160,96,0.85)",
+                fontWeight: 600,
               }}
             >
-              爸，清明又到了。
-              <br />
-              我们把您的故事写成了书，
-              <br />
-              让每一段记忆都不会被遗忘。
+              "做人要踏实，走过的路都算数。"
             </p>
             <p
               className="font-outfit"
               style={{
                 fontSize: 12,
                 color: "rgba(255,255,255,0.35)",
+                marginTop: 8,
+                marginBottom: 16,
+              }}
+            >
+              —— 父亲常说的话
+            </p>
+
+            {/* 分割线 */}
+            <div style={{ height: 1, backgroundColor: "rgba(200,160,96,0.12)", margin: "0 20px 16px" }} />
+
+            {/* 家人寄语 */}
+            <p
+              className="font-serif-sc"
+              style={{
+                fontSize: 14,
+                lineHeight: 1.8,
+                color: "rgba(255,255,255,0.55)",
+              }}
+            >
+              您走过的路，我们都记得。
+              <br />
+              这本书记录了您一生的故事，
+              <br />
+              愿来看您的人，都能感受您的温暖。
+            </p>
+            <p
+              className="font-outfit"
+              style={{
+                fontSize: 12,
+                color: "rgba(255,255,255,0.3)",
                 marginTop: 10,
               }}
             >
-              —— 儿子 小明
+              儿子 小明 · 全家敬献
             </p>
           </div>
         </div>
