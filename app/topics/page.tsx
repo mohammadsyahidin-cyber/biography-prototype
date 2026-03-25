@@ -5,85 +5,250 @@ import { StatusBar } from "@/components/StatusBar";
 import { BackHeader } from "@/components/BackHeader";
 import { TabBar } from "@/components/TabBar";
 import Link from "next/link";
-import { ChevronRight, MessageCircle, Users } from "lucide-react";
+import { ChevronRight, Check, PenLine, Lock, MessageCircle, Users } from "lucide-react";
 
-const topics = [
-  { id: "1.1", title: "出生地与老宅", status: "可生成", statusColor: "green", participants: 2, messages: 8 },
-  { id: "1.2", title: "清水河摸鱼", status: "可生成", statusColor: "green", participants: 2, messages: 5 },
-  { id: "1.3", title: "兄弟们的趣事", status: "待补充", statusColor: "coral", participants: 1, messages: 3 },
-  { id: "1.4", title: "街坊邻居", status: "待补充", statusColor: "coral", participants: 0, messages: 0 },
-  { id: "1.5", title: "上学之前的日子", status: "未开始", statusColor: "grey", participants: 0, messages: 0 },
+type Status = "done" | "ready" | "draft" | "todo";
+
+interface Section {
+  title: string;
+  status: Status;
+  participants?: number;
+  messages?: number;
+}
+
+interface Chapter {
+  num: number;
+  title: string;
+  sections: Section[];
+}
+
+const chapters: Chapter[] = [
+  {
+    num: 1,
+    title: "童年生活与成长环境",
+    sections: [
+      { title: "出生地与老宅", status: "done", participants: 2, messages: 8 },
+      { title: "清水河摸鱼", status: "done", participants: 2, messages: 5 },
+      { title: "兄弟们的趣事", status: "draft", participants: 1, messages: 3 },
+      { title: "街坊邻居", status: "draft" },
+      { title: "上学之前的日子", status: "todo" },
+    ],
+  },
+  {
+    num: 2,
+    title: "求学与启蒙",
+    sections: [
+      { title: "十里山路上学", status: "draft", participants: 1, messages: 2 },
+      { title: "恩师记忆", status: "draft" },
+      { title: "中学时光", status: "todo" },
+    ],
+  },
+  {
+    num: 3,
+    title: "工作与事业",
+    sections: [
+      { title: "进入工厂", status: "draft", participants: 1, messages: 1 },
+      { title: "同事与友情", status: "todo" },
+      { title: "职业变迁", status: "todo" },
+    ],
+  },
+  {
+    num: 4,
+    title: "婚姻与家庭",
+    sections: [
+      { title: "恋爱故事", status: "todo" },
+      { title: "子女教育", status: "todo" },
+    ],
+  },
+  {
+    num: 5,
+    title: "人生感悟与寄语",
+    sections: [
+      { title: "人生哲学", status: "todo" },
+      { title: "对后代寄语", status: "todo" },
+    ],
+  },
 ];
 
-function getBorderColor(c: string) {
-  if (c === "green") return "var(--accent-green)";
-  if (c === "coral") return "var(--accent-coral)";
-  return "var(--bg-muted)";
-}
-
-function getBadgeBg(c: string) {
-  if (c === "green") return "var(--accent-green-light)";
-  if (c === "coral") return "var(--accent-coral-light)";
-  return "var(--bg-muted)";
-}
-
-function getBadgeText(c: string) {
-  if (c === "green") return "var(--accent-green)";
-  if (c === "coral") return "var(--accent-coral)";
-  return "var(--text-tertiary)";
-}
+const statusConfig: Record<Status, { label: string; bg: string; color: string; Icon: typeof Check }> = {
+  done: { label: "可生成", bg: "var(--accent-green-light)", color: "var(--accent-green)", Icon: Check },
+  ready: { label: "可生成", bg: "var(--accent-green-light)", color: "var(--accent-green)", Icon: Check },
+  draft: { label: "待补充", bg: "var(--accent-coral-light)", color: "var(--accent-coral)", Icon: PenLine },
+  todo: { label: "未开始", bg: "var(--bg-muted)", color: "var(--text-tertiary)", Icon: Lock },
+};
 
 export default function TopicsPage() {
+  const totalSections = chapters.reduce((s, c) => s + c.sections.length, 0);
+  const doneSections = chapters.reduce(
+    (s, c) => s + c.sections.filter((sec) => sec.status === "done").length,
+    0
+  );
+
   return (
     <PhoneFrame>
       <StatusBar />
       <BackHeader title="父亲的岁月" />
       <div className="flex-1 overflow-auto font-outfit" style={{ backgroundColor: "var(--bg-page)" }}>
         <div style={{ padding: "4px 20px 24px" }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, color: "var(--text-primary)", marginBottom: 6 }}>第一章 · 童年生活与成长环境</h2>
-          <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.5, marginBottom: 16 }}>以下是本章的小节话题，点击进入查看对话或补充内容</p>
 
-          <div className="flex flex-col gap-3">
-            {topics.map((t) => (
-              <Link
-                key={t.id}
-                href="/topic-detail"
-                className="flex items-center"
+          {/* Progress overview */}
+          <div
+            style={{
+              padding: "14px 16px",
+              borderRadius: 14,
+              backgroundColor: "var(--bg-card)",
+              border: "1px solid var(--border-subtle)",
+              marginBottom: 16,
+            }}
+          >
+            <div className="flex items-center justify-between" style={{ marginBottom: 10 }}>
+              <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>全书进度</span>
+              <span style={{ fontSize: 13, color: "var(--accent-green)", fontWeight: 600 }}>
+                {doneSections}/{totalSections} 节可生成
+              </span>
+            </div>
+            <div style={{ height: 6, borderRadius: 3, backgroundColor: "var(--bg-muted)", overflow: "hidden" }}>
+              <div
                 style={{
-                  backgroundColor: "var(--bg-card)",
-                  borderRadius: 14,
-                  padding: "14px 12px 14px 0",
-                  border: "1px solid var(--border-subtle)",
-                  overflow: "hidden",
+                  width: `${(doneSections / totalSections) * 100}%`,
+                  height: "100%",
+                  borderRadius: 3,
+                  backgroundColor: "var(--accent-green)",
                 }}
-              >
-                {/* left color border */}
-                <div style={{ width: 4, alignSelf: "stretch", backgroundColor: getBorderColor(t.statusColor), borderRadius: "4px 0 0 4px", flexShrink: 0 }} />
-                <div className="flex-1" style={{ paddingLeft: 14 }}>
-                  <div className="flex items-center gap-2" style={{ marginBottom: 4 }}>
-                    <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>{t.id} {t.title}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <span style={{ fontSize: 11, color: getBadgeText(t.statusColor), backgroundColor: getBadgeBg(t.statusColor), padding: "2px 8px", borderRadius: 6, fontWeight: 500 }}>{t.status}</span>
-                  </div>
-                  {t.messages > 0 ? (
-                    <div className="flex items-center gap-3" style={{ marginTop: 6 }}>
-                      <div className="flex items-center gap-1">
-                        <Users size={12} style={{ color: "var(--text-tertiary)" }} />
-                        <span style={{ fontSize: 11, color: "var(--text-tertiary)" }}>{t.participants}人参与</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <MessageCircle size={12} style={{ color: "var(--text-tertiary)" }} />
-                        <span style={{ fontSize: 11, color: "var(--text-tertiary)" }}>{t.messages}条对话</span>
-                      </div>
+              />
+            </div>
+          </div>
+
+          {/* Chapter list */}
+          <div className="flex flex-col gap-4">
+            {chapters.map((ch) => {
+              const chDone = ch.sections.filter((s) => s.status === "done").length;
+              return (
+                <div key={ch.num}>
+                  {/* Chapter header */}
+                  <div className="flex items-center gap-3" style={{ marginBottom: 10 }}>
+                    <div
+                      className="flex items-center justify-center shrink-0"
+                      style={{
+                        width: 28,
+                        height: 28,
+                        borderRadius: 8,
+                        backgroundColor: "var(--accent-green)",
+                        color: "var(--white)",
+                        fontSize: 13,
+                        fontWeight: 700,
+                      }}
+                    >
+                      {ch.num}
                     </div>
-                  ) : (
-                    <p style={{ fontSize: 11, color: "var(--text-tertiary)", marginTop: 6 }}>还没有人聊这个话题</p>
-                  )}
+                    <div className="flex-1">
+                      <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>
+                        {ch.title}
+                      </span>
+                    </div>
+                    <span style={{ fontSize: 11, color: "var(--text-tertiary)" }}>
+                      {chDone}/{ch.sections.length}
+                    </span>
+                  </div>
+
+                  {/* Sections with timeline */}
+                  <div style={{ marginLeft: 13 }}>
+                    {ch.sections.map((sec, si) => {
+                      const cfg = statusConfig[sec.status];
+                      const StatusIcon = cfg.Icon;
+                      return (
+                        <Link
+                          key={si}
+                          href="/topic-detail"
+                          className="flex"
+                          style={{ textDecoration: "none" }}
+                        >
+                          {/* Timeline line + dot */}
+                          <div
+                            className="flex flex-col items-center shrink-0"
+                            style={{ width: 16 }}
+                          >
+                            <div
+                              style={{
+                                width: 1,
+                                height: 10,
+                                backgroundColor: si === 0 ? "transparent" : "var(--border-subtle)",
+                              }}
+                            />
+                            <div
+                              style={{
+                                width: 8,
+                                height: 8,
+                                borderRadius: 4,
+                                backgroundColor: sec.status === "done" ? "var(--accent-green)" : sec.status === "draft" ? "var(--accent-coral)" : "var(--border-subtle)",
+                                flexShrink: 0,
+                              }}
+                            />
+                            <div
+                              style={{
+                                width: 1,
+                                flex: 1,
+                                backgroundColor: si === ch.sections.length - 1 ? "transparent" : "var(--border-subtle)",
+                              }}
+                            />
+                          </div>
+
+                          {/* Section card */}
+                          <div
+                            className="flex items-center flex-1"
+                            style={{
+                              marginLeft: 10,
+                              marginBottom: si < ch.sections.length - 1 ? 4 : 0,
+                              padding: "10px 10px 10px 12px",
+                              borderRadius: 12,
+                              backgroundColor: "var(--bg-card)",
+                              border: `1px solid ${sec.status === "done" ? "var(--accent-green-light)" : "var(--border-subtle)"}`,
+                            }}
+                          >
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2" style={{ marginBottom: 3 }}>
+                                <span style={{ fontSize: 14, fontWeight: 500, color: sec.status === "todo" ? "var(--text-tertiary)" : "var(--text-primary)" }}>
+                                  {ch.num}.{si + 1} {sec.title}
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <span
+                                  className="flex items-center gap-1"
+                                  style={{
+                                    fontSize: 10,
+                                    fontWeight: 500,
+                                    padding: "1px 6px",
+                                    borderRadius: 4,
+                                    backgroundColor: cfg.bg,
+                                    color: cfg.color,
+                                  }}
+                                >
+                                  <StatusIcon size={9} />
+                                  {cfg.label}
+                                </span>
+                                {sec.messages && sec.messages > 0 && (
+                                  <span className="flex items-center gap-1" style={{ fontSize: 10, color: "var(--text-tertiary)" }}>
+                                    <MessageCircle size={9} />
+                                    {sec.messages}
+                                  </span>
+                                )}
+                                {sec.participants && sec.participants > 0 && (
+                                  <span className="flex items-center gap-1" style={{ fontSize: 10, color: "var(--text-tertiary)" }}>
+                                    <Users size={9} />
+                                    {sec.participants}
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                            <ChevronRight size={16} style={{ color: "var(--text-tertiary)", flexShrink: 0 }} />
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
-                <ChevronRight size={18} style={{ color: "var(--text-tertiary)", marginRight: 4, flexShrink: 0 }} />
-              </Link>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
