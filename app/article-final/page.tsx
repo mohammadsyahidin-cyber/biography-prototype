@@ -368,8 +368,11 @@ export default function ArticleFinalPage() {
             {/* Card body */}
             <div style={{ padding: "16px 24px 20px" }}>
               {/* Excerpt */}
-              <p className="font-serif-sc" style={{ fontSize: 13, lineHeight: 1.8, color: "var(--text-secondary)", marginBottom: 16 }}>
-                "那条清水河，不只是一条河，更是一家人童年记忆里最温暖的地方。"
+              <p className="font-serif-sc" style={{ fontSize: 14, lineHeight: 1.9, color: "var(--text-secondary)", marginBottom: 4 }}>
+                小时候，家门口不远处就是清水河。每到夏天，建国和三个兄弟结伴去河边摸鱼，赤着脚踩进凉丝丝的河水里，那是最快乐的时光。
+              </p>
+              <p className="font-serif-sc" style={{ fontSize: 14, lineHeight: 1.9, color: "var(--text-secondary)", marginBottom: 16 }}>
+                那条清水河，不只是一条河，更是一家人童年记忆里最温暖的地方。
               </p>
 
               {/* Divider */}
@@ -379,19 +382,27 @@ export default function ArticleFinalPage() {
                 <div style={{ flex: 1, height: 1, backgroundColor: "var(--border-subtle)" }} />
               </div>
 
-              {/* Contributors */}
+              {/* Bottom: contributors + QR */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <div className="flex items-center" style={{ marginRight: -4 }}>
-                    <div className="flex items-center justify-center" style={{ width: 24, height: 24, borderRadius: 12, backgroundColor: "var(--accent-coral)", color: "#fff", fontSize: 10, fontWeight: 600, border: "2px solid #FFFDF8" }}>爸</div>
-                    <div className="flex items-center justify-center" style={{ width: 24, height: 24, borderRadius: 12, backgroundColor: "var(--accent-coral)", color: "#fff", fontSize: 10, fontWeight: 600, marginLeft: -8, border: "2px solid #FFFDF8" }}>妈</div>
-                    <div className="flex items-center justify-center" style={{ width: 24, height: 24, borderRadius: 12, backgroundColor: "var(--accent-green)", color: "#fff", fontSize: 10, fontWeight: 600, marginLeft: -8, border: "2px solid #FFFDF8" }}>明</div>
+                    <div className="flex items-center justify-center" style={{ width: 26, height: 26, borderRadius: 13, backgroundColor: "var(--accent-coral)", color: "#fff", fontSize: 10, fontWeight: 600, border: "2px solid #FFFDF8" }}>爸</div>
+                    <div className="flex items-center justify-center" style={{ width: 26, height: 26, borderRadius: 13, backgroundColor: "var(--accent-coral)", color: "#fff", fontSize: 10, fontWeight: 600, marginLeft: -8, border: "2px solid #FFFDF8" }}>妈</div>
+                    <div className="flex items-center justify-center" style={{ width: 26, height: 26, borderRadius: 13, backgroundColor: "var(--accent-green)", color: "#fff", fontSize: 10, fontWeight: 600, marginLeft: -8, border: "2px solid #FFFDF8" }}>明</div>
                   </div>
-                  <span className="font-outfit" style={{ fontSize: 11, color: "var(--text-tertiary)" }}>3人共同讲述</span>
+                  <div>
+                    <span className="font-outfit" style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", display: "block" }}>3人共同讲述</span>
+                    <span className="font-outfit" style={{ fontSize: 10, color: "var(--text-tertiary)" }}>家族传记 · 父亲的岁月</span>
+                  </div>
                 </div>
-                {/* QR placeholder */}
-                <div style={{ width: 44, height: 44, borderRadius: 8, backgroundColor: "var(--bg-muted)", border: "1px solid var(--border-subtle)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <QrCode size={24} style={{ color: "var(--text-tertiary)" }} />
+                {/* QR code area */}
+                <div className="flex flex-col items-center gap-1">
+                  <div style={{ width: 52, height: 52, borderRadius: 10, backgroundColor: "#fff", border: "1.5px solid var(--border-subtle)", display: "flex", alignItems: "center", justifyContent: "center", padding: 4 }}>
+                    <div style={{ width: "100%", height: "100%", borderRadius: 6, backgroundColor: "var(--bg-muted)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <QrCode size={22} style={{ color: "var(--accent-green)" }} />
+                    </div>
+                  </div>
+                  <span className="font-outfit" style={{ fontSize: 9, color: "var(--text-tertiary)", letterSpacing: 0.5 }}>扫码阅读</span>
                 </div>
               </div>
             </div>

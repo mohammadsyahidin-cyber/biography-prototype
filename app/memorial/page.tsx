@@ -64,6 +64,7 @@ export default function MemorialPage() {
               <ChevronLeft size={20} style={{ color: "#fff" }} />
             </Link>
             <button
+              onClick={() => setShowShare(true)}
               className="flex items-center justify-center"
               style={{
                 width: 36,
@@ -489,7 +490,10 @@ export default function MemorialPage() {
               <p className="font-serif-sc" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(200,160,96,0.7)", fontStyle: "italic" }}>
                 "做人要踏实，走过的路都算数。"
               </p>
-              <p className="font-outfit" style={{ fontSize: 11, color: "rgba(255,255,255,0.25)", marginTop: 8 }}>—— 父亲常说的话</p>
+              <p className="font-outfit" style={{ fontSize: 11, color: "rgba(255,255,255,0.25)", marginTop: 6, marginBottom: 14 }}>—— 父亲常说的话</p>
+              <p className="font-serif-sc" style={{ fontSize: 12, lineHeight: 1.8, color: "rgba(255,255,255,0.4)" }}>
+                从清水河边的少年，到工厂里的青年，再到儿孙满堂的老人。他的故事，是一个时代的缩影，更是一个家族的温暖记忆。
+              </p>
             </div>
 
             {/* Bottom with stats + QR */}
@@ -501,10 +505,17 @@ export default function MemorialPage() {
                   <div className="flex items-center gap-3 font-outfit">
                     <span style={{ fontSize: 12, color: "rgba(200,160,96,0.6)" }}>5章节</span>
                     <span style={{ fontSize: 12, color: "rgba(200,160,96,0.6)" }}>13故事</span>
+                    <span style={{ fontSize: 12, color: "rgba(200,160,96,0.6)" }}>3家人</span>
                   </div>
                 </div>
-                <div style={{ width: 48, height: 48, borderRadius: 10, backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(200,160,96,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <QrCode size={26} style={{ color: "rgba(200,160,96,0.5)" }} />
+                {/* QR code area */}
+                <div className="flex flex-col items-center gap-1">
+                  <div style={{ width: 52, height: 52, borderRadius: 10, backgroundColor: "rgba(255,255,255,0.9)", display: "flex", alignItems: "center", justifyContent: "center", padding: 4 }}>
+                    <div style={{ width: "100%", height: "100%", borderRadius: 6, backgroundColor: "rgba(200,160,96,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <QrCode size={22} style={{ color: "rgba(200,160,96,0.7)" }} />
+                    </div>
+                  </div>
+                  <span className="font-outfit" style={{ fontSize: 9, color: "rgba(255,255,255,0.3)", letterSpacing: 0.5 }}>扫码追忆</span>
                 </div>
               </div>
             </div>
