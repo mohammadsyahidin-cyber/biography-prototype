@@ -2,7 +2,9 @@
 
 /**
  * 江河传记 Logo
- * Concept: flowing river lines emerging from an open book
+ * A single river stream rises from below, splits into two flowing curves
+ * that mirror each other — forming an open book silhouette.
+ * Simple enough to read at 18px, distinctive at 44px.
  */
 export function Logo({ size = 40, color = "#FFFDF8" }: { size?: number; color?: string }) {
   return (
@@ -13,48 +15,44 @@ export function Logo({ size = 40, color = "#FFFDF8" }: { size?: number; color?: 
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Open book base */}
+      {/* River source — vertical stem */}
       <path
-        d="M8 36V14C8 14 12 11 24 11C36 11 40 14 40 14V36C40 36 36 33 24 33C12 33 8 36 8 36Z"
+        d="M24 40V26"
         stroke={color}
-        strokeWidth="2"
+        strokeWidth="2.8"
         strokeLinecap="round"
-        strokeLinejoin="round"
+      />
+      {/* Left book page — river branch curving left */}
+      <path
+        d="M24 26C24 20 20 14 10 9"
+        stroke={color}
+        strokeWidth="2.8"
+        strokeLinecap="round"
         fill="none"
       />
-      {/* Center spine */}
-      <line x1="24" y1="11" x2="24" y2="33" stroke={color} strokeWidth="1.5" opacity="0.5" />
-      {/* River wave 1 */}
+      {/* Right book page — river branch curving right */}
       <path
-        d="M13 20C15.5 18 18 22 21 20"
+        d="M24 26C24 20 28 14 38 9"
         stroke={color}
-        strokeWidth="2"
+        strokeWidth="2.8"
         strokeLinecap="round"
-        opacity="0.9"
+        fill="none"
       />
-      {/* River wave 2 */}
+      {/* Left wave accent */}
       <path
-        d="M14 26C16.5 24 19 28 22 26"
+        d="M15 17C13.5 18.5 11 16.5 9.5 18"
         stroke={color}
-        strokeWidth="2"
+        strokeWidth="1.8"
         strokeLinecap="round"
-        opacity="0.6"
+        opacity="0.5"
       />
-      {/* River wave 3 (right page) */}
+      {/* Right wave accent */}
       <path
-        d="M27 20C29.5 18 32 22 35 20"
+        d="M33 17C34.5 18.5 37 16.5 38.5 18"
         stroke={color}
-        strokeWidth="2"
+        strokeWidth="1.8"
         strokeLinecap="round"
-        opacity="0.9"
-      />
-      {/* River wave 4 (right page) */}
-      <path
-        d="M26 26C28.5 24 31 28 34 26"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-        opacity="0.6"
+        opacity="0.5"
       />
     </svg>
   );
