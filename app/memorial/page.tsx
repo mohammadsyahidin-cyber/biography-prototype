@@ -63,21 +63,6 @@ export default function MemorialPage() {
             >
               <ChevronLeft size={20} style={{ color: "#fff" }} />
             </Link>
-            <button
-              onClick={() => setShowShare(true)}
-              className="flex items-center justify-center"
-              style={{
-                width: 36,
-                height: 36,
-                borderRadius: 18,
-                backgroundColor: "rgba(255,255,255,0.15)",
-                backdropFilter: "blur(8px)",
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              <Share2 size={16} style={{ color: "#fff" }} />
-            </button>
           </div>
 
           {/* Name & dates at bottom of hero */}

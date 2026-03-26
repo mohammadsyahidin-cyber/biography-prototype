@@ -7,7 +7,6 @@ import { StatusBar } from "@/components/StatusBar";
 import { BackHeader } from "@/components/BackHeader";
 import Link from "next/link";
 import {
-  Share2,
   GripVertical,
   Plus,
   Lightbulb,
@@ -23,7 +22,6 @@ import {
   UserPlus,
   Check,
   MessageCircle,
-  Globe,
 } from "lucide-react";
 
 interface Section {
@@ -195,28 +193,7 @@ export default function OutlinePage() {
   return (
     <PhoneFrame>
       <StatusBar />
-      <BackHeader
-        title="传记大纲"
-        rightAction={
-          <button
-            onClick={() => setShowShare(true)}
-            className="flex items-center justify-center"
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: 18,
-              backgroundColor: "var(--bg-muted)",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            <Share2
-              size={16}
-              style={{ color: "var(--text-secondary)" }}
-            />
-          </button>
-        }
-      />
+      <BackHeader title="传记大纲" />
       <div
         className="flex-1 overflow-auto font-outfit"
         style={{ backgroundColor: "var(--bg-page)" }}

@@ -90,50 +90,6 @@ export default function ArticleFinalPage() {
         >
           <ChevronLeft size={20} style={{ color: "var(--text-primary)" }} />
         </Link>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setShowToc(true)}
-            className="flex items-center justify-center"
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: 18,
-              backgroundColor: "var(--bg-muted)",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            <List size={18} style={{ color: "var(--text-secondary)" }} />
-          </button>
-          <button
-            onClick={() => { setLiked(!liked); setLikeCount(liked ? likeCount - 1 : likeCount + 1); }}
-            className="flex items-center justify-center"
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: 18,
-              backgroundColor: "var(--bg-muted)",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            <Heart size={18} fill={liked ? "var(--accent-coral)" : "none"} style={{ color: liked ? "var(--accent-coral)" : "var(--text-secondary)" }} />
-          </button>
-          <button
-            onClick={() => setShowShare(true)}
-            className="flex items-center justify-center"
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: 18,
-              backgroundColor: "var(--accent-green)",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            <Share2 size={18} style={{ color: "var(--white)" }} />
-          </button>
-        </div>
       </div>
 
       {/* Article content */}
@@ -305,6 +261,24 @@ export default function ArticleFinalPage() {
           backgroundColor: "var(--bg-card)",
         }}
       >
+        <button
+          onClick={() => setShowToc(true)}
+          className="flex items-center gap-1.5"
+          style={{
+            height: 36,
+            padding: "0 14px",
+            borderRadius: 18,
+            backgroundColor: "var(--bg-muted)",
+            border: "none",
+            cursor: "pointer",
+            color: "var(--text-secondary)",
+            fontSize: 13,
+            fontWeight: 500,
+          }}
+        >
+          <List size={14} />
+          目录
+        </button>
         <div className="flex items-center gap-2">
           <Heart size={16} fill={liked ? "var(--accent-coral)" : "none"} style={{ color: "var(--accent-coral)" }} />
           <span style={{ fontSize: 13, color: "var(--text-secondary)" }}>{likeCount} 人觉得值得珍藏</span>
@@ -363,11 +337,12 @@ export default function ArticleFinalPage() {
                   flexShrink: 0,
                 }}
               >
-                {/* Card header with bg */}
-                <div style={{ position: "relative", height: 120, background: "linear-gradient(135deg, #5A4123 0%, #3C2D19 100%)", padding: "24px 24px 0", overflow: "hidden" }}>
-                  <img src="/biography-prototype/images/card-bg.jpg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.3 }} />
-                  <div style={{ position: "relative" }}>
-                    <p className="font-outfit" style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", letterSpacing: 1, marginBottom: 6 }}>家族传记 · 父亲的岁月</p>
+                {/* Card header with bg image */}
+                <div style={{ position: "relative", height: 140, overflow: "hidden" }}>
+                  <img src="/biography-prototype/images/card-bg.jpg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(26,22,18,0.2) 0%, rgba(26,22,18,0.8) 100%)" }} />
+                  <div style={{ position: "absolute", bottom: 14, left: 24, right: 24 }}>
+                    <p className="font-outfit" style={{ fontSize: 11, color: "rgba(255,255,255,0.7)", letterSpacing: 1, marginBottom: 4 }}>家族传记 · 父亲的岁月</p>
                     <h3 className="font-serif-sc" style={{ fontSize: 20, fontWeight: 700, color: "#fff", lineHeight: 1.3 }}>清水河边的少年时光</h3>
                   </div>
                 </div>
