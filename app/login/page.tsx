@@ -2,7 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { PhoneFrame } from "@/components/PhoneFrame";
-import { BookOpen, MessageCircle, Smartphone } from "lucide-react";
+import { MessageCircle, Smartphone } from "lucide-react";
+import { Logo } from "@/components/Logo";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -27,14 +28,14 @@ export default function LoginPage() {
               backgroundColor: "#8A7356",
             }}
           >
-            <BookOpen size={40} style={{ color: "#FFFDF8" }} />
+            <Logo size={44} color="#FFFDF8" />
           </div>
 
           <h1
             className="font-serif-sc"
-            style={{ fontSize: 32, fontWeight: 700, color: "#2C2419" }}
+            style={{ fontSize: 28, fontWeight: 700, color: "#2C2419" }}
           >
-            岁记
+            江河传记
           </h1>
 
           {/* Decorative divider */}

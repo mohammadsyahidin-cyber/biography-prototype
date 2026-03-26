@@ -211,6 +211,11 @@ export default function SettingsPage() {
             退出登录
           </span>
         </button>
+
+        {/* App info footer */}
+        <div className="flex flex-col items-center gap-[4px] py-[8px]">
+          <span className="text-[12px] text-[var(--text-tertiary)] font-outfit">江河传记 v1.0</span>
+        </div>
       </div>
     </PhoneFrame>
   );

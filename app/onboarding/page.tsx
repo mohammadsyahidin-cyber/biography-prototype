@@ -9,7 +9,7 @@ const steps = [
   {
     icon: Mic,
     title: "用声音记录故事",
-    desc: "和家人轻松聊天，岁记帮你\n把珍贵的回忆变成文字",
+    desc: "只需对着手机讲述\n江河传记帮你变成文字",
   },
   {
     icon: BookOpen,

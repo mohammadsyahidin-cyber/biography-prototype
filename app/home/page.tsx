@@ -5,6 +5,7 @@ import { StatusBar } from "@/components/StatusBar";
 import { TabBar } from "@/components/TabBar";
 import Link from "next/link";
 import { Mic, Settings, Flame } from "lucide-react";
+import { Logo } from "@/components/Logo";
 
 export default function HomePage() {
   return (
@@ -14,7 +15,12 @@ export default function HomePage() {
         <div style={{ padding: "8px 20px 24px" }}>
           {/* header */}
           <div className="flex items-center justify-between" style={{ marginBottom: 8 }}>
-              <p style={{ fontSize: 15, color: "var(--text-secondary)" }}>用文字，留住家人的故事</p>
+              <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center" style={{ width: 28, height: 28, borderRadius: 8, backgroundColor: "var(--accent-green)" }}>
+                  <Logo size={18} color="#FFFDF8" />
+                </div>
+                <span className="font-serif-sc" style={{ fontSize: 16, fontWeight: 700, color: "var(--text-primary)" }}>江河传记</span>
+              </div>
               <div className="flex items-center gap-3">
                 <Link href="/memorial" className="flex items-center justify-center" style={{ width: 36, height: 36, borderRadius: 18, backgroundColor: "var(--bg-muted)" }}>
                   <Flame size={18} style={{ color: "var(--accent-warm)" }} />
