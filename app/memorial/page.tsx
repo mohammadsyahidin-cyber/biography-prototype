@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
-import { ChevronLeft, Share2, Flame, X, Copy, QrCode, MessageCircle, Globe } from "lucide-react";
+import { ChevronLeft, Share2, Flame, X, Copy, QrCode, MessageCircle, Globe, BookOpen } from "lucide-react";
 
 export default function MemorialPage() {
   const [showShare, setShowShare] = useState(false);
@@ -509,6 +509,19 @@ export default function MemorialPage() {
                       </div>
                       <span className="font-outfit" style={{ fontSize: 9, color: "rgba(255,255,255,0.45)", letterSpacing: 0.5 }}>扫码追忆</span>
                     </div>
+                  </div>
+                </div>
+
+                {/* Brand bar */}
+                <div style={{ padding: "0 24px 20px" }}>
+                  <div style={{ height: 1, backgroundColor: "rgba(200,160,96,0.12)", marginBottom: 12 }} />
+                  <div className="flex items-center justify-center gap-1.5">
+                    <div className="flex items-center justify-center" style={{ width: 18, height: 18, borderRadius: 5, backgroundColor: "rgba(200,160,96,0.8)" }}>
+                      <BookOpen size={10} style={{ color: "#1A1612" }} />
+                    </div>
+                    <span className="font-serif-sc" style={{ fontSize: 10, fontWeight: 600, color: "rgba(200,160,96,0.67)" }}>江河传记</span>
+                    <span className="font-outfit" style={{ fontSize: 10, color: "rgba(255,255,255,0.25)" }}>·</span>
+                    <span className="font-outfit" style={{ fontSize: 9, color: "rgba(255,255,255,0.25)" }}>用文字，留住家人的故事</span>
                   </div>
                 </div>
               </div>
