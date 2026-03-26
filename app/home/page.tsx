@@ -13,14 +13,14 @@ export default function HomePage() {
       <div className="flex-1 overflow-auto font-outfit" style={{ backgroundColor: "var(--bg-page)" }}>
         <div style={{ padding: "8px 20px 24px" }}>
           {/* header */}
-          <div className="flex items-center justify-between" style={{ marginBottom: 4 }}>
-              <p style={{ fontSize: 15, color: "var(--text-secondary)", marginTop: 2 }}>用文字，留住家人的故事</p>
-              <div className="flex items-center gap-2">
-                <Link href="/memorial" className="flex items-center justify-center" style={{ width: 34, height: 34, borderRadius: 17, backgroundColor: "var(--bg-muted)" }}>
-                  <Flame size={16} style={{ color: "var(--accent-warm)" }} />
+          <div className="flex items-center justify-between" style={{ marginBottom: 8 }}>
+              <p style={{ fontSize: 15, color: "var(--text-secondary)" }}>用文字，留住家人的故事</p>
+              <div className="flex items-center gap-3">
+                <Link href="/memorial" className="flex items-center justify-center" style={{ width: 36, height: 36, borderRadius: 18, backgroundColor: "var(--bg-muted)" }}>
+                  <Flame size={18} style={{ color: "var(--accent-warm)" }} />
                 </Link>
-                <Link href="/settings" className="flex items-center justify-center" style={{ width: 34, height: 34, borderRadius: 17, backgroundColor: "var(--bg-muted)" }}>
-                  <Settings size={16} style={{ color: "var(--text-secondary)" }} />
+                <Link href="/settings" className="flex items-center justify-center" style={{ width: 36, height: 36, borderRadius: 18, backgroundColor: "var(--bg-muted)" }}>
+                  <Settings size={18} style={{ color: "var(--text-secondary)" }} />
                 </Link>
               </div>
           </div>
