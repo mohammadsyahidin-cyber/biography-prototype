@@ -387,9 +387,7 @@ export default function ArticleFinalPage() {
                   {/* Brand bar */}
                   <div style={{ height: 1, backgroundColor: "var(--border-subtle)", marginTop: 12 }} />
                   <div className="flex items-center justify-center gap-1.5" style={{ marginTop: 10 }}>
-                    <div className="flex items-center justify-center" style={{ width: 18, height: 18, borderRadius: 5, backgroundColor: "var(--accent-green)" }}>
-                      <BookOpen size={10} style={{ color: "#FFFDF8" }} />
-                    </div>
+                    <img src="/biography-prototype/images/logo.png" alt="" width={18} height={18} style={{ borderRadius: 5 }} />
                     <span className="font-serif-sc" style={{ fontSize: 10, fontWeight: 600, color: "var(--text-primary)" }}>江河传记</span>
                     <span className="font-outfit" style={{ fontSize: 10, color: "var(--text-tertiary)" }}>·</span>
                     <span className="font-outfit" style={{ fontSize: 9, color: "var(--text-tertiary)" }}>用文字，留住家人的故事</span>

@@ -19,17 +19,7 @@ export default function LoginPage() {
 
         {/* Logo area */}
         <div className="flex flex-col items-center" style={{ gap: 16, padding: "0 40px" }}>
-          <div
-            className="flex items-center justify-center"
-            style={{
-              width: 88,
-              height: 88,
-              borderRadius: 22,
-              backgroundColor: "#8A7356",
-            }}
-          >
-            <Logo size={44} color="#FFFDF8" />
-          </div>
+          <Logo size={88} />
 
           <h1
             className="font-serif-sc"

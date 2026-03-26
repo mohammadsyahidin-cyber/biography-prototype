@@ -16,9 +16,7 @@ export default function HomePage() {
           {/* header */}
           <div className="flex items-center justify-between" style={{ marginBottom: 8 }}>
               <div className="flex items-center gap-2">
-                <div className="flex items-center justify-center" style={{ width: 28, height: 28, borderRadius: 8, backgroundColor: "var(--accent-green)" }}>
-                  <Logo size={18} color="#FFFDF8" />
-                </div>
+                <Logo size={28} />
                 <span className="font-serif-sc" style={{ fontSize: 16, fontWeight: 700, color: "var(--text-primary)" }}>江河传记</span>
               </div>
               <div className="flex items-center gap-3">
