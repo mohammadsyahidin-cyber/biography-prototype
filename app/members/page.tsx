@@ -48,7 +48,7 @@ export default function MembersPage() {
       >
         <h1
           style={{
-            fontSize: 22,
+            fontSize: 20,
             fontWeight: 700,
             color: "var(--text-primary)",
             marginBottom: 4,
@@ -56,7 +56,7 @@ export default function MembersPage() {
         >
           家人
         </h1>
-        <p style={{ fontSize: 13, color: "var(--text-tertiary)" }}>
+        <p style={{ fontSize: 12, color: "var(--text-tertiary)" }}>
           当前成员（3人）
         </p>
       </div>
@@ -66,39 +66,39 @@ export default function MembersPage() {
         className="flex-1 overflow-auto font-outfit"
         style={{ padding: "16px 20px" }}
       >
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3">
           {members.map((m, i) => (
             <div
               key={i}
-              className="flex items-center gap-3.5"
+              className="flex items-center gap-3"
               style={{
                 backgroundColor: "var(--bg-card)",
-                borderRadius: 16,
+                borderRadius: 14,
                 border: "1px solid var(--border-subtle)",
-                padding: 20,
+                padding: 16,
               }}
             >
               <div
                 className="flex items-center justify-center shrink-0"
                 style={{
-                  width: 64,
-                  height: 64,
-                  borderRadius: 32,
+                  width: 48,
+                  height: 48,
+                  borderRadius: 24,
                   backgroundColor: m.bg,
                 }}
               >
-                <span style={{ fontSize: 22, fontWeight: 700, color: "#fff" }}>
+                <span style={{ fontSize: 16, fontWeight: 700, color: "#fff" }}>
                   {m.avatar}
                 </span>
               </div>
               <div>
                 <div
                   className="flex items-center gap-2"
-                  style={{ marginBottom: 4 }}
+                  style={{ marginBottom: 3 }}
                 >
                   <span
                     style={{
-                      fontSize: 17,
+                      fontSize: 15,
                       fontWeight: 700,
                       color: "var(--text-primary)",
                     }}
@@ -107,10 +107,10 @@ export default function MembersPage() {
                   </span>
                   <span
                     style={{
-                      fontSize: 11,
+                      fontSize: 10,
                       fontWeight: 600,
-                      padding: "2px 8px",
-                      borderRadius: 8,
+                      padding: "2px 7px",
+                      borderRadius: 6,
                       backgroundColor: m.roleBg,
                       color: m.roleColor,
                     }}
@@ -118,7 +118,7 @@ export default function MembersPage() {
                     {m.role}
                   </span>
                 </div>
-                <span style={{ fontSize: 13, color: "var(--text-tertiary)" }}>
+                <span style={{ fontSize: 12, color: "var(--text-tertiary)" }}>
                   {m.stats}
                 </span>
               </div>
@@ -131,15 +131,15 @@ export default function MembersPage() {
             className="flex items-center justify-center gap-2"
             style={{
               backgroundColor: "var(--bg-card)",
-              borderRadius: 16,
+              borderRadius: 14,
               border: "1px solid var(--border-subtle)",
-              padding: 20,
+              padding: 16,
               color: "var(--accent-green)",
-              fontSize: 15,
+              fontSize: 14,
               fontWeight: 600,
             }}
           >
-            <UserPlus size={18} />
+            <UserPlus size={16} />
             邀请家人加入
           </Link>
         </div>
