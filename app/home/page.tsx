@@ -4,7 +4,7 @@ import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
 import { TabBar } from "@/components/TabBar";
 import Link from "next/link";
-import { Mic } from "lucide-react";
+import { Mic, Settings, Flame } from "lucide-react";
 
 export default function HomePage() {
   return (
@@ -13,8 +13,16 @@ export default function HomePage() {
       <div className="flex-1 overflow-auto font-outfit" style={{ backgroundColor: "var(--bg-page)" }}>
         <div style={{ padding: "8px 20px 24px" }}>
           {/* header */}
-          <div style={{ marginBottom: 4 }}>
+          <div className="flex items-center justify-between" style={{ marginBottom: 4 }}>
               <p style={{ fontSize: 15, color: "var(--text-secondary)", marginTop: 2 }}>用文字，留住家人的故事</p>
+              <div className="flex items-center gap-2">
+                <Link href="/memorial" className="flex items-center justify-center" style={{ width: 34, height: 34, borderRadius: 17, backgroundColor: "var(--bg-muted)" }}>
+                  <Flame size={16} style={{ color: "var(--accent-warm)" }} />
+                </Link>
+                <Link href="/settings" className="flex items-center justify-center" style={{ width: 34, height: 34, borderRadius: 17, backgroundColor: "var(--bg-muted)" }}>
+                  <Settings size={16} style={{ color: "var(--text-secondary)" }} />
+                </Link>
+              </div>
           </div>
 
           {/* 进行中 label */}
