@@ -4,79 +4,76 @@ import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
 import { BackHeader } from "@/components/BackHeader";
 import Link from "next/link";
-import { User, Heart } from "lucide-react";
+import { Mic, Heart, ImagePlus } from "lucide-react";
 
 export default function CreatePage() {
-  const modes = [
-    { key: "alive", label: "在世人物", desc: "记录在世亲人的故事", icon: User, selected: true },
-    { key: "memorial", label: "纪念模式", desc: "纪念已故亲人的一生", icon: Heart, selected: false },
-  ];
   const relations = ["父亲", "母亲", "爷爷", "其他"];
   const selectedRelation = "父亲";
 
   return (
     <PhoneFrame>
       <StatusBar />
-      <BackHeader title="创建新传记" titleClassName="font-serif-sc" />
+      <BackHeader title="创建新传记" />
       <div className="flex-1 overflow-auto font-outfit" style={{ backgroundColor: "var(--bg-page)" }}>
-        <div style={{ padding: "4px 20px 32px" }}>
+        <div style={{ padding: "16px 24px 24px" }} className="flex flex-col gap-6">
           {/* 选择模式 */}
-          <div style={{ marginBottom: 24 }}>
-            <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>选择模式</span>
+          <div>
+            <span style={{ fontSize: 16, fontWeight: 600, color: "var(--text-primary)" }}>选择模式</span>
             <div className="flex gap-3" style={{ marginTop: 10 }}>
-              {modes.map((m) => {
-                const Icon = m.icon;
-                return (
-                  <div
-                    key={m.key}
-                    className="flex-1 flex flex-col items-center gap-2"
-                    style={{
-                      padding: "18px 12px",
-                      borderRadius: 16,
-                      border: m.selected ? "2px solid var(--accent-green)" : "1.5px solid var(--border-subtle)",
-                      backgroundColor: m.selected ? "var(--accent-green-light)" : "var(--bg-card)",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <div className="flex items-center justify-center" style={{ width: 44, height: 44, borderRadius: 22, backgroundColor: m.selected ? "var(--accent-green)" : "var(--bg-muted)" }}>
-                      <Icon size={20} style={{ color: m.selected ? "var(--white)" : "var(--text-secondary)" }} />
-                    </div>
-                    <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{m.label}</span>
-                    <span style={{ fontSize: 11, color: "var(--text-secondary)", textAlign: "center" }}>{m.desc}</span>
-                  </div>
-                );
-              })}
+              {/* 在世人物 - selected */}
+              <div
+                className="flex-1 flex flex-col items-center justify-center gap-2"
+                style={{
+                  height: 100,
+                  borderRadius: 16,
+                  border: "2px solid var(--accent-green)",
+                  backgroundColor: "#fff",
+                }}
+              >
+                <Mic size={24} style={{ color: "var(--accent-green)" }} />
+                <span style={{ fontSize: 14, fontWeight: 600, color: "var(--accent-green)" }}>在世人物</span>
+                <span style={{ fontSize: 11, color: "var(--text-secondary)" }}>本人可参与讲述</span>
+              </div>
+              {/* 纪念模式 */}
+              <div
+                className="flex-1 flex flex-col items-center justify-center gap-2"
+                style={{
+                  height: 100,
+                  borderRadius: 16,
+                  border: "1px solid var(--border-subtle)",
+                  backgroundColor: "#fff",
+                }}
+              >
+                <Heart size={24} style={{ color: "var(--text-secondary)" }} />
+                <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>纪念模式</span>
+                <span style={{ fontSize: 11, color: "var(--text-secondary)" }}>为已故亲人而写</span>
+              </div>
             </div>
           </div>
 
           {/* 传记主人公 */}
-          <div style={{ marginBottom: 24 }}>
-            <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>传记主人公</span>
-            <div style={{ marginTop: 10, height: 48, borderRadius: 12, border: "1.5px solid var(--border-subtle)", backgroundColor: "var(--bg-card)", padding: "0 16px", display: "flex", alignItems: "center" }}>
-              <span style={{ fontSize: 15, color: "var(--text-tertiary)" }}>请输入主人公姓名</span>
+          <div>
+            <span style={{ fontSize: 16, fontWeight: 600, color: "var(--text-primary)" }}>传记主人公</span>
+            <div style={{ marginTop: 10, height: 48, borderRadius: 12, border: "1px solid var(--border-subtle)", backgroundColor: "#fff", padding: "0 16px", display: "flex", alignItems: "center" }}>
+              <span style={{ fontSize: 15, color: "var(--text-tertiary)" }}>请输入姓名，如&ldquo;父亲&rdquo;&ldquo;外婆&rdquo;</span>
             </div>
           </div>
 
           {/* 与您的关系 */}
-          <div style={{ marginBottom: 24 }}>
-            <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>与您的关系</span>
+          <div>
+            <span style={{ fontSize: 16, fontWeight: 600, color: "var(--text-primary)" }}>与您的关系</span>
             <div className="flex gap-2" style={{ marginTop: 10, flexWrap: "wrap" }}>
               {relations.map((r) => (
                 <div
                   key={r}
                   style={{
-                    height: 38,
-                    paddingLeft: 18,
-                    paddingRight: 18,
-                    borderRadius: 19,
-                    display: "flex",
-                    alignItems: "center",
+                    padding: "10px 16px",
+                    borderRadius: 100,
                     fontSize: 14,
-                    fontWeight: r === selectedRelation ? 600 : 400,
-                    backgroundColor: r === selectedRelation ? "var(--accent-green)" : "var(--bg-card)",
-                    color: r === selectedRelation ? "var(--white)" : "var(--text-primary)",
-                    border: r === selectedRelation ? "none" : "1.5px solid var(--border-subtle)",
-                    cursor: "pointer",
+                    fontWeight: 500,
+                    backgroundColor: r === selectedRelation ? "var(--accent-green)" : "#fff",
+                    color: r === selectedRelation ? "#fff" : "var(--text-primary)",
+                    border: r === selectedRelation ? "none" : "1px solid var(--border-subtle)",
                   }}
                 >
                   {r}
@@ -85,20 +82,32 @@ export default function CreatePage() {
             </div>
           </div>
 
-          {/* 主讲人 */}
-          <div style={{ marginBottom: 32 }}>
-            <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>主讲人</span>
-            <div style={{ marginTop: 10, height: 48, borderRadius: 12, border: "1.5px solid var(--border-subtle)", backgroundColor: "var(--bg-card)", padding: "0 16px", display: "flex", alignItems: "center" }}>
-              <span style={{ fontSize: 15, color: "var(--text-tertiary)" }}>请输入主讲人姓名</span>
+          {/* 上传一张照片 */}
+          <div>
+            <span style={{ fontSize: 16, fontWeight: 600, color: "var(--text-primary)" }}>上传一张照片</span>
+            <div
+              className="flex flex-col items-center justify-center gap-2.5"
+              style={{
+                marginTop: 10,
+                height: 140,
+                borderRadius: 14,
+                border: "1.5px dashed var(--border-strong)",
+                backgroundColor: "#FFFDF8",
+              }}
+            >
+              <ImagePlus size={36} style={{ color: "var(--text-tertiary)" }} />
+              <span style={{ fontSize: 14, color: "var(--text-tertiary)" }}>点击上传主人公照片</span>
+              <span style={{ fontSize: 12, color: "var(--border-strong)" }}>这张照片将作为传记封面</span>
             </div>
           </div>
 
-          {/* Bottom button */}
+          {/* 开始采访 */}
           <Link
             href="/interview"
-            className="flex items-center justify-center"
-            style={{ height: 52, borderRadius: 14, backgroundColor: "var(--accent-green)", color: "var(--white)", fontSize: 16, fontWeight: 600, width: "100%" }}
+            className="flex items-center justify-center gap-2"
+            style={{ height: 52, borderRadius: 12, backgroundColor: "var(--accent-green)", color: "#fff", fontSize: 16, fontWeight: 600, width: "100%" }}
           >
+            <Mic size={18} />
             开始采访
           </Link>
         </div>
