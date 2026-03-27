@@ -68,8 +68,9 @@ export default function MembersPage() {
       >
         <div className="flex flex-col gap-3">
           {members.map((m, i) => (
-            <div
+            <Link
               key={i}
+              href="/member-detail"
               className="flex items-center gap-3"
               style={{
                 backgroundColor: "var(--bg-card)",
@@ -122,7 +123,7 @@ export default function MembersPage() {
                   {m.stats}
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
 
           {/* Invite button */}
