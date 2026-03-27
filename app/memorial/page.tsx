@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
-import { ChevronLeft, Share2, Flame, X, Copy, QrCode, MessageCircle, Globe } from "lucide-react";
+import { ChevronLeft, Share2, Flame, X, Copy, QrCode, CircleDot } from "lucide-react";
 
 export default function MemorialPage() {
   const [showShare, setShowShare] = useState(false);
@@ -525,22 +525,24 @@ export default function MemorialPage() {
               </div>
 
               {/* Action buttons */}
-              <div className="flex items-center gap-4 font-outfit" style={{ marginTop: 24, flexShrink: 0 }}>
+              <div className="flex items-center gap-5 font-outfit" style={{ marginTop: 24, flexShrink: 0 }}>
                 <button className="flex flex-col items-center gap-1.5" style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}>
-                  <div className="flex items-center justify-center" style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: "#2DC100" }}>
-                    <MessageCircle size={22} style={{ color: "#fff" }} />
+                  <div className="flex items-center justify-center" style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: "rgba(255,255,255,0.12)" }}>
+                    <Share2 size={22} style={{ color: "rgba(255,255,255,0.8)" }} />
                   </div>
-                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.8)" }}>微信</span>
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.8)" }}>转发好友</span>
                 </button>
                 <button className="flex flex-col items-center gap-1.5" style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}>
-                  <div className="flex items-center justify-center" style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: "#2DC100" }}>
-                    <Globe size={22} style={{ color: "#fff" }} />
+                  <div className="flex items-center justify-center" style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: "rgba(255,255,255,0.12)" }}>
+                    <CircleDot size={22} style={{ color: "rgba(255,255,255,0.8)" }} />
                   </div>
                   <span style={{ fontSize: 11, color: "rgba(255,255,255,0.8)" }}>朋友圈</span>
                 </button>
-                <button className="flex items-center justify-center gap-2" style={{ height: 48, padding: "0 28px", borderRadius: 24, backgroundColor: "rgba(200,160,96,0.9)", border: "none", cursor: "pointer", color: "#1A1612", fontSize: 14, fontWeight: 600 }}>
-                  <Copy size={16} />
-                  保存图片
+                <button className="flex flex-col items-center gap-1.5" style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}>
+                  <div className="flex items-center justify-center" style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: "rgba(255,255,255,0.12)" }}>
+                    <Copy size={22} style={{ color: "rgba(255,255,255,0.8)" }} />
+                  </div>
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.8)" }}>保存海报</span>
                 </button>
               </div>
 
