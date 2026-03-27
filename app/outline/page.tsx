@@ -22,6 +22,8 @@ import {
   UserPlus,
   Check,
   MessageCircle,
+  Forward,
+  CircleDot,
 } from "lucide-react";
 
 interface Section {
@@ -646,49 +648,31 @@ export default function OutlinePage() {
               {/* Divider */}
               <div style={{ height: 1, backgroundColor: "var(--border-subtle)", marginBottom: 16 }} />
 
-              {/* Share link */}
-              <div
-                className="flex items-center gap-2"
-                style={{
-                  padding: "10px 14px",
-                  borderRadius: 12,
-                  backgroundColor: "var(--bg-surface)",
-                  border: "1px solid var(--border-subtle)",
-                  marginBottom: 16,
-                }}
-              >
-                <span className="flex-1" style={{ fontSize: 13, color: "var(--text-tertiary)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                  biography.app/invite/abc123
-                </span>
+              {/* Share buttons */}
+              <div className="flex gap-3">
                 <button
-                  onClick={() => { setCopied(true); setTimeout(() => setCopied(false), 2000); }}
-                  className="flex items-center gap-1 shrink-0"
+                  className="flex items-center justify-center gap-2 flex-1"
                   style={{
-                    height: 28, padding: "0 10px", borderRadius: 8,
-                    backgroundColor: copied ? "var(--accent-green-light)" : "var(--bg-muted)",
-                    border: "none", cursor: "pointer",
-                    fontSize: 12, fontWeight: 500,
-                    color: copied ? "var(--accent-green)" : "var(--text-secondary)",
+                    height: 48, borderRadius: 12,
+                    backgroundColor: "var(--accent-green)", border: "none", cursor: "pointer",
+                    color: "#fff", fontSize: 14, fontWeight: 600,
                   }}
                 >
-                  {copied ? <Check size={12} /> : <Copy size={12} />}
-                  {copied ? "已复制" : "复制"}
+                  <Forward size={18} />
+                  转发给好友
+                </button>
+                <button
+                  className="flex items-center justify-center gap-2 flex-1"
+                  style={{
+                    height: 48, borderRadius: 12,
+                    backgroundColor: "var(--accent-green-light)", border: "none", cursor: "pointer",
+                    color: "var(--accent-green)", fontSize: 14, fontWeight: 600,
+                  }}
+                >
+                  <CircleDot size={18} />
+                  转发到朋友圈
                 </button>
               </div>
-
-              {/* Share button */}
-              <button
-                className="flex items-center justify-center gap-2"
-                style={{
-                  width: "100%",
-                  height: 48, borderRadius: 12,
-                  backgroundColor: "#2DC100", border: "none", cursor: "pointer",
-                  color: "#fff", fontSize: 15, fontWeight: 600,
-                }}
-              >
-                <MessageCircle size={18} />
-                发送到微信
-              </button>
             </div>
           </div>
         </div>

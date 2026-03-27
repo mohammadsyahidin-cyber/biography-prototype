@@ -1,6 +1,6 @@
 "use client";
 
-import { Copy, MessageCircle, QrCode, User } from "lucide-react";
+import { Forward, CircleDot, User } from "lucide-react";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
 import { BackHeader } from "@/components/BackHeader";
@@ -125,50 +125,23 @@ export default function InvitePage() {
         <div className="rounded-[16px] bg-[var(--bg-card)] border border-[var(--border-subtle)] px-[20px] py-[24px] flex flex-col gap-[16px]">
           <div className="flex flex-col gap-[6px]">
             <h2 className="text-[16px] font-semibold text-[var(--text-primary)] font-outfit">
-              分享邀请链接
+              邀请家人加入
             </h2>
             <p className="text-[13px] text-[var(--text-secondary)] font-outfit">
-              将链接发送给家人，他们可以直接加入
+              通过微信转发邀请，家人点击即可加入
             </p>
           </div>
 
-          {/* Link row */}
-          <div className="flex items-center gap-[10px] bg-[var(--bg-surface)] rounded-[12px] h-[48px] px-[14px]">
-            <span className="flex-1 text-[14px] text-[var(--text-secondary)] font-outfit truncate">
-              bio.app/invite/f8k2x
-            </span>
-            <button className="px-[14px] py-[6px] rounded-[8px] bg-[var(--accent-green)] text-white text-[13px] font-semibold font-outfit flex items-center gap-[4px] shrink-0">
-              <Copy size={14} />
-              复制
+          {/* Share buttons */}
+          <div className="flex gap-3">
+            <button className="flex-1 flex items-center justify-center gap-2 h-[48px] rounded-[12px] bg-[var(--accent-green)] text-white text-[14px] font-semibold font-outfit">
+              <Forward size={18} />
+              转发给好友
             </button>
-          </div>
-
-          {/* Share icons */}
-          <div className="flex justify-center gap-[32px]">
-            <div className="flex flex-col items-center gap-[6px]">
-              <div className="w-[48px] h-[48px] rounded-full bg-[#07C160] flex items-center justify-center">
-                <MessageCircle size={22} className="text-white" />
-              </div>
-              <span className="text-[11px] text-[var(--text-secondary)] font-outfit">
-                微信
-              </span>
-            </div>
-            <div className="flex flex-col items-center gap-[6px]">
-              <div className="w-[48px] h-[48px] rounded-full bg-[var(--accent-coral)] flex items-center justify-center">
-                <MessageCircle size={22} className="text-white" />
-              </div>
-              <span className="text-[11px] text-[var(--text-secondary)] font-outfit">
-                短信
-              </span>
-            </div>
-            <div className="flex flex-col items-center gap-[6px]">
-              <div className="w-[48px] h-[48px] rounded-full bg-[var(--bg-muted)] flex items-center justify-center">
-                <QrCode size={22} className="text-[var(--text-secondary)]" />
-              </div>
-              <span className="text-[11px] text-[var(--text-secondary)] font-outfit">
-                二维码
-              </span>
-            </div>
+            <button className="flex-1 flex items-center justify-center gap-2 h-[48px] rounded-[12px] bg-[var(--accent-green-light)] text-[var(--accent-green)] text-[14px] font-semibold font-outfit">
+              <CircleDot size={18} />
+              转发到朋友圈
+            </button>
           </div>
         </div>
 
