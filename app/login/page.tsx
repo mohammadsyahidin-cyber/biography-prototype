@@ -73,7 +73,7 @@ export default function LoginPage() {
         >
           {/* WeChat login button */}
           <button
-            onClick={() => router.push("/onboarding")}
+            onClick={() => router.push("/home")}
             className="flex items-center justify-center gap-2 w-full font-outfit"
             style={{
               height: 50,
@@ -92,6 +92,7 @@ export default function LoginPage() {
 
           {/* Phone login button */}
           <button
+            onClick={() => router.push("/phone-login")}
             className="flex items-center justify-center gap-2 w-full font-outfit"
             style={{
               height: 50,
