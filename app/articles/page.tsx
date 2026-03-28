@@ -5,7 +5,8 @@ import Link from "next/link";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
 import { TabBar } from "@/components/TabBar";
-import { BookOpen } from "lucide-react";
+import { BookOpen, FileText } from "lucide-react";
+import { EmptyState } from "@/components/EmptyState";
 
 type FilterKey = "all" | "final" | "draft";
 
@@ -208,7 +209,14 @@ export default function ArticlesPage() {
         className="flex-1 overflow-auto font-outfit"
         style={{ padding: "8px 20px 16px" }}
       >
-        {filteredChapters.map((ch) => (
+        {filteredChapters.length === 0 ? (
+          <EmptyState
+            icon={<FileText size={36} style={{ color: "var(--text-tertiary)" }} />}
+            title="暂无文章"
+            description="完成采访后，选择话题生成文章"
+          />
+        ) : (
+        filteredChapters.map((ch) => (
           <div key={ch.num} style={{ marginBottom: 20 }}>
             {/* Chapter header */}
             <div
@@ -347,7 +355,8 @@ export default function ArticlesPage() {
               ))}
             </div>
           </div>
-        ))}
+        ))
+        )}
       </div>
 
       <TabBar activeTab="articles" />

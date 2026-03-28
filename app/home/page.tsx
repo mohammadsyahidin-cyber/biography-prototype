@@ -1,13 +1,18 @@
 "use client";
 
+import { useState } from "react";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
 import { TabBar } from "@/components/TabBar";
+import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
-import { Mic, Settings, Flame } from "lucide-react";
+import { Mic, Users, Flame, BookOpen, Plus } from "lucide-react";
 import { Logo } from "@/components/Logo";
 
 export default function HomePage() {
+  // Toggle to preview empty state: set to true to see new-user view
+  const [isEmpty] = useState(false);
+
   return (
     <PhoneFrame>
       <StatusBar />
@@ -20,15 +25,47 @@ export default function HomePage() {
                 <span className="font-serif-sc" style={{ fontSize: 16, fontWeight: 700, color: "var(--text-primary)" }}>江河传记</span>
               </div>
               <div className="flex items-center gap-3">
-                <Link href="/memorial" className="flex items-center justify-center" style={{ width: 36, height: 36, borderRadius: 18, backgroundColor: "var(--bg-muted)" }}>
-                  <Flame size={18} style={{ color: "var(--accent-warm)" }} />
-                </Link>
-                <Link href="/settings" className="flex items-center justify-center" style={{ width: 36, height: 36, borderRadius: 18, backgroundColor: "var(--bg-muted)" }}>
-                  <Settings size={18} style={{ color: "var(--text-secondary)" }} />
+                {!isEmpty && (
+                  <Link href="/memorial" className="flex items-center justify-center" style={{ width: 36, height: 36, borderRadius: 18, backgroundColor: "var(--bg-muted)" }}>
+                    <Flame size={18} style={{ color: "var(--accent-warm)" }} />
+                  </Link>
+                )}
+                <Link href="/members" className="flex items-center justify-center" style={{ width: 36, height: 36, borderRadius: 18, backgroundColor: "var(--bg-muted)" }}>
+                  <Users size={18} style={{ color: "var(--text-secondary)" }} />
                 </Link>
               </div>
           </div>
 
+          {isEmpty ? (
+            /* Empty state for new users */
+            <div style={{ marginTop: 60 }}>
+              <EmptyState
+                icon={<BookOpen size={36} style={{ color: "var(--accent-warm)" }} />}
+                title="开始记录家人的故事"
+                description="创建第一本传记，用文字留住温暖的记忆"
+                action={
+                  <Link
+                    href="/create-biography"
+                    className="flex items-center justify-center gap-2"
+                    style={{
+                      height: 48,
+                      paddingLeft: 28,
+                      paddingRight: 28,
+                      borderRadius: 24,
+                      backgroundColor: "var(--accent-green)",
+                      color: "var(--white)",
+                      fontSize: 15,
+                      fontWeight: 600,
+                    }}
+                  >
+                    <Plus size={18} />
+                    创建传记
+                  </Link>
+                }
+              />
+            </div>
+          ) : (
+            <>
           {/* 进行中 label */}
           <div className="flex items-center gap-1.5" style={{ margin: "20px 0 10px" }}>
             <div style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: "var(--accent-warm)" }} />
@@ -87,6 +124,8 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+            </>
+          )}
         </div>
       </div>
       <TabBar activeTab="home" />

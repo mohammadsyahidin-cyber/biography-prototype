@@ -4,7 +4,7 @@ import Link from "next/link";
 import { UserPlus } from "lucide-react";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
-import { TabBar } from "@/components/TabBar";
+import { BackHeader } from "@/components/BackHeader";
 
 const members = [
   {
@@ -40,32 +40,16 @@ export default function MembersPage() {
   return (
     <PhoneFrame>
       <StatusBar />
-
-      {/* Header */}
-      <div
-        className="shrink-0 font-outfit"
-        style={{ padding: "12px 20px 0" }}
-      >
-        <h1
-          style={{
-            fontSize: 20,
-            fontWeight: 700,
-            color: "var(--text-primary)",
-            marginBottom: 4,
-          }}
-        >
-          家人
-        </h1>
-        <p style={{ fontSize: 12, color: "var(--text-tertiary)" }}>
-          当前成员（3人）
-        </p>
-      </div>
+      <BackHeader title="成员管理" />
 
       {/* Member list */}
       <div
         className="flex-1 overflow-auto font-outfit"
         style={{ padding: "16px 20px" }}
       >
+        <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginBottom: 12 }}>
+          当前成员（3人）
+        </p>
         <div className="flex flex-col gap-3">
           {members.map((m, i) => (
             <Link
@@ -145,8 +129,6 @@ export default function MembersPage() {
           </Link>
         </div>
       </div>
-
-      <TabBar activeTab="family" />
     </PhoneFrame>
   );
 }

@@ -94,7 +94,7 @@ export default function SettingsPage() {
   return (
     <PhoneFrame>
       <StatusBar />
-      <BackHeader title="设置" />
+      <BackHeader title="我的" />
 
       <div className="flex-1 overflow-auto px-[24px] py-[16px] flex flex-col gap-[24px]">
         {/* Profile card */}

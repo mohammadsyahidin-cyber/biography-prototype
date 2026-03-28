@@ -2,13 +2,13 @@
 
 import React from "react";
 import Link from "next/link";
-import { House, ListTree, FileText, Users } from "lucide-react";
+import { House, ListTree, FileText, User } from "lucide-react";
 
 const tabs = [
   { key: "home", label: "首页", icon: House, href: "/home" },
   { key: "outline", label: "大纲", icon: ListTree, href: "/topics" },
   { key: "articles", label: "文章", icon: FileText, href: "/articles" },
-  { key: "family", label: "家人", icon: Users, href: "/members" },
+  { key: "me", label: "我的", icon: User, href: "/settings" },
 ];
 
 export function TabBar({ activeTab = "home" }: { activeTab?: string }) {

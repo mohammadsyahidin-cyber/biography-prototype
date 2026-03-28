@@ -7,8 +7,8 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
 const topics = [
-  { title: "清水河摸鱼", chapter: "第一章", stats: "5次对话 · 已生成文章" },
-  { title: "老家的土灶饭", chapter: "第二章", stats: "2次对话 · 草稿" },
+  { title: "清水河摸鱼", chapter: "第一章", stats: "5次对话", status: "final" as const, href: "/article-final" },
+  { title: "老家的土灶饭", chapter: "第二章", stats: "2次对话", status: "draft" as const, href: "/article" },
 ];
 
 export default function MemberDetailPage() {
@@ -45,9 +45,21 @@ export default function MemberDetailPage() {
         <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)", display: "block", marginBottom: 12 }}>参与的话题</span>
         <div className="flex flex-col gap-3">
           {topics.map((t, i) => (
-            <Link key={i} href="/topic-detail" className="flex items-center" style={{ backgroundColor: "var(--bg-card)", borderRadius: 14, border: "1px solid var(--border-subtle)", padding: "14px 16px" }}>
+            <Link key={i} href={t.href} className="flex items-center" style={{ backgroundColor: "var(--bg-card)", borderRadius: 14, border: "1px solid var(--border-subtle)", padding: "14px 16px" }}>
               <div className="flex-1">
-                <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)", display: "block", marginBottom: 3 }}>{t.title}</span>
+                <div className="flex items-center gap-2" style={{ marginBottom: 3 }}>
+                  <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>{t.title}</span>
+                  <span style={{
+                    fontSize: 10,
+                    fontWeight: 600,
+                    padding: "2px 7px",
+                    borderRadius: 6,
+                    backgroundColor: t.status === "final" ? "var(--accent-green-light)" : "var(--accent-coral-light)",
+                    color: t.status === "final" ? "var(--accent-green)" : "var(--accent-coral)",
+                  }}>
+                    {t.status === "final" ? "已定稿" : "草稿"}
+                  </span>
+                </div>
                 <span style={{ fontSize: 12, color: "var(--text-tertiary)" }}>{t.chapter} · {t.stats}</span>
               </div>
               <ChevronRight size={16} style={{ color: "var(--text-tertiary)" }} />
