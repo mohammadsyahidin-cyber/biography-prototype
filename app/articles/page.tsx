@@ -7,6 +7,7 @@ import { StatusBar } from "@/components/StatusBar";
 import { TabBar } from "@/components/TabBar";
 import { BookOpen, FileText } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
+import { useAuth } from "@/lib/auth";
 
 type FilterKey = "all" | "final" | "draft";
 
@@ -132,6 +133,7 @@ function StatusBadge({ status }: { status: "final" | "draft" }) {
 }
 
 export default function ArticlesPage() {
+  const { isLoggedIn } = useAuth();
   const [filter, setFilter] = useState<FilterKey>("all");
 
   const filteredChapters = chapters
@@ -153,6 +155,22 @@ export default function ArticlesPage() {
     <PhoneFrame>
       <StatusBar />
 
+      {!isLoggedIn ? (
+        <>
+          {/* Header */}
+          <div className="shrink-0 font-outfit" style={{ padding: "12px 20px 0" }}>
+            <h1 style={{ fontSize: 22, fontWeight: 700, color: "var(--text-primary)", marginBottom: 4 }}>文章</h1>
+          </div>
+          <div className="flex-1 flex flex-col items-center justify-center" style={{ backgroundColor: "var(--bg-page)" }}>
+            <EmptyState
+              icon={<FileText size={36} style={{ color: "var(--text-tertiary)" }} />}
+              title="还没有文章"
+              description="登录后开始采访，生成专属文章"
+            />
+          </div>
+        </>
+      ) : (
+        <>
       {/* Header */}
       <div
         className="shrink-0 font-outfit"
@@ -358,6 +376,8 @@ export default function ArticlesPage() {
         ))
         )}
       </div>
+        </>
+      )}
 
       <TabBar activeTab="articles" />
     </PhoneFrame>

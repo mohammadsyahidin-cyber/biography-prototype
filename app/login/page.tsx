@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { MessageCircle, Smartphone } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import { login } from "@/lib/auth";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -73,7 +74,7 @@ export default function LoginPage() {
         >
           {/* WeChat login button */}
           <button
-            onClick={() => router.push("/home")}
+            onClick={() => { login(); router.push("/home"); }}
             className="flex items-center justify-center gap-2 w-full font-outfit"
             style={{
               height: 50,

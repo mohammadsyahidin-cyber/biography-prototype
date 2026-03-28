@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
 import { TabBar } from "@/components/TabBar";
@@ -8,10 +7,11 @@ import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
 import { Mic, Users, Flame, BookOpen, Plus } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import { useAuth } from "@/lib/auth";
 
 export default function HomePage() {
-  // Toggle to preview empty state: set to true to see new-user view
-  const [isEmpty] = useState(false);
+  const { isLoggedIn } = useAuth();
+  const isEmpty = !isLoggedIn;
 
   return (
     <PhoneFrame>

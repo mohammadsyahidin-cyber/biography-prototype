@@ -6,11 +6,13 @@ import Link from "next/link";
 import {
   Pencil, BookOpen, UserCircle, PenLine, Bell, Type, Download, Info,
   MessageSquare, ChevronRight, LogOut, Plus, ArrowLeftRight, X, Check,
-  FileText, BookMarked, ImageIcon, CircleCheck,
+  FileText, BookMarked, ImageIcon, CircleCheck, User,
 } from "lucide-react";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
 import { BackHeader } from "@/components/BackHeader";
+import { TabBar } from "@/components/TabBar";
+import { useAuth, logout } from "@/lib/auth";
 import type { LucideIcon } from "lucide-react";
 
 interface SettingRow {
@@ -63,6 +65,7 @@ function SettingsSection({ title, rows }: { title: string; rows: SettingRow[] })
 
 export default function SettingsPage() {
   const router = useRouter();
+  const { isLoggedIn } = useAuth();
   const [showFontSheet, setShowFontSheet] = useState(false);
   const [showExportSheet, setShowExportSheet] = useState(false);
   const [showSwitchSheet, setShowSwitchSheet] = useState(false);
@@ -96,6 +99,41 @@ export default function SettingsPage() {
       <StatusBar />
       <BackHeader title="我的" />
 
+      {!isLoggedIn ? (
+        /* ===== Guest / Not Logged In View ===== */
+        <div className="flex-1 overflow-auto px-[24px] py-[16px] flex flex-col gap-[24px]">
+          {/* Guest profile card */}
+          <div className="flex items-center gap-[14px]">
+            <div className="w-[56px] h-[56px] rounded-full bg-[var(--bg-muted)] flex items-center justify-center shrink-0">
+              <User size={24} className="text-[var(--text-tertiary)]" />
+            </div>
+            <div className="flex-1 flex flex-col gap-[2px]">
+              <span className="text-[18px] font-semibold text-[var(--text-primary)] font-outfit">未登录</span>
+              <span className="text-[14px] text-[var(--text-tertiary)] font-outfit">登录后体验完整功能</span>
+            </div>
+          </div>
+
+          <SettingsSection title="通用设置" rows={[
+            { icon: Type, iconColor: "text-[var(--accent-coral)]", label: "字体大小", value: fontSizes[selectedFont], hasChevron: true, onClick: () => setShowFontSheet(true) },
+          ]} />
+
+          <SettingsSection title="其他" rows={otherRows} />
+
+          {/* Spacer */}
+          <div className="flex-1" />
+
+          {/* Login button */}
+          <Link href="/login" className="rounded-[14px] bg-[var(--accent-green)] py-[14px] flex items-center justify-center gap-[8px]">
+            <User size={18} className="text-white" />
+            <span className="text-[15px] font-semibold text-white font-outfit">登录 / 注册</span>
+          </Link>
+
+          <div className="flex flex-col items-center gap-[4px] py-[8px]">
+            <span className="text-[12px] text-[var(--text-tertiary)] font-outfit">江河传记 v1.0</span>
+          </div>
+        </div>
+      ) : (
+      /* ===== Logged In View ===== */
       <div className="flex-1 overflow-auto px-[24px] py-[16px] flex flex-col gap-[24px]">
         {/* Profile card */}
         <div className="flex items-center gap-[14px]">
@@ -136,6 +174,7 @@ export default function SettingsPage() {
           <span className="text-[12px] text-[var(--text-tertiary)] font-outfit">江河传记 v1.0</span>
         </div>
       </div>
+      )}
 
       {/* Font Size Sheet */}
       {showFontSheet && (
@@ -247,7 +286,7 @@ export default function SettingsPage() {
             <p style={{ fontSize: 14, color: "var(--text-secondary)", textAlign: "center", marginBottom: 24 }}>退出后需要重新登录才能访问传记</p>
             <div className="flex gap-3">
               <button onClick={() => setShowLogoutDialog(false)} className="flex-1" style={{ height: 44, borderRadius: 12, backgroundColor: "var(--bg-muted)", fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>取消</button>
-              <button onClick={() => router.push("/login")} className="flex-1" style={{ height: 44, borderRadius: 12, backgroundColor: "#E05A47", fontSize: 15, fontWeight: 600, color: "#fff" }}>退出</button>
+              <button onClick={() => { logout(); router.push("/home"); }} className="flex-1" style={{ height: 44, borderRadius: 12, backgroundColor: "#E05A47", fontSize: 15, fontWeight: 600, color: "#fff" }}>退出</button>
             </div>
           </div>
         </div>
@@ -277,6 +316,7 @@ export default function SettingsPage() {
           </div>
         </div>
       )}
+      <TabBar activeTab="me" />
     </PhoneFrame>
   );
 }

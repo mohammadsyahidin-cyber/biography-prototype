@@ -4,8 +4,10 @@ import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
 import { BackHeader } from "@/components/BackHeader";
 import { TabBar } from "@/components/TabBar";
+import { EmptyState } from "@/components/EmptyState";
 import Link from "next/link";
-import { ChevronRight, Check, PenLine, Lock, MessageCircle, Users } from "lucide-react";
+import { ChevronRight, Check, PenLine, Lock, MessageCircle, Users, ListTree, Mic } from "lucide-react";
+import { useAuth } from "@/lib/auth";
 
 type Status = "done" | "ready" | "draft" | "todo";
 
@@ -78,6 +80,7 @@ const statusConfig: Record<Status, { label: string; bg: string; color: string; I
 };
 
 export default function TopicsPage() {
+  const { isLoggedIn } = useAuth();
   const totalSections = chapters.reduce((s, c) => s + c.sections.length, 0);
   const doneSections = chapters.reduce(
     (s, c) => s + c.sections.filter((sec) => sec.status === "done").length,
@@ -87,6 +90,25 @@ export default function TopicsPage() {
   return (
     <PhoneFrame>
       <StatusBar />
+      {!isLoggedIn ? (
+        <>
+          <BackHeader title="大纲" />
+          <div className="flex-1 flex flex-col items-center justify-center" style={{ backgroundColor: "var(--bg-page)" }}>
+            <EmptyState
+              icon={<ListTree size={36} style={{ color: "var(--text-tertiary)" }} />}
+              title="还没有大纲"
+              description={"登录后开始创建传记大纲"}
+              action={
+                <Link href="/login" className="flex items-center justify-center gap-2 font-outfit" style={{ height: 48, paddingLeft: 28, paddingRight: 28, borderRadius: 22, backgroundColor: "var(--accent-green)", color: "var(--white)", fontSize: 15, fontWeight: 600 }}>
+                  <Mic size={18} />
+                  开始对话
+                </Link>
+              }
+            />
+          </div>
+        </>
+      ) : (
+        <>
       <BackHeader title="父亲的岁月" />
       <div className="flex-1 overflow-auto font-outfit" style={{ backgroundColor: "var(--bg-page)" }}>
         <div style={{ padding: "4px 20px 24px" }}>
@@ -252,6 +274,8 @@ export default function TopicsPage() {
           </div>
         </div>
       </div>
+        </>
+      )}
       <TabBar activeTab="outline" />
     </PhoneFrame>
   );
