@@ -116,7 +116,7 @@ export default function StyleSelectPage() {
       {/* Bottom button */}
       <div className="px-[20px] py-[16px]">
         <Link
-          href="/article"
+          href="/article-preview"
           className="block w-full py-[14px] rounded-[14px] bg-[var(--accent-green)] text-white text-center text-[16px] font-semibold font-outfit"
         >
           选择此风格
