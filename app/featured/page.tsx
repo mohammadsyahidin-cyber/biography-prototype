@@ -56,8 +56,7 @@ export default function FeaturedPage() {
           {bioCards.map((card, i) => (
             <div key={i} style={{ borderRadius: 16, overflow: "hidden", border: "1px solid var(--border-subtle)", backgroundColor: "var(--bg-card)" }}>
               {/* Cover */}
-              <div style={{ position: "relative", height: 100, backgroundColor: card.coverBg, overflow: "hidden" }}>
-                <img src="/biography-prototype/images/card-bg.jpg" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.4 }} />
+              <div style={{ position: "relative", height: 100, backgroundColor: card.coverBg }}>
                 <div style={{ position: "absolute", left: 12, top: 12, padding: "4px 10px", borderRadius: 8, backgroundColor: "rgba(0,0,0,0.3)" }}>
                   <span style={{ fontSize: 11, fontWeight: 500, color: "#FFFDF8" }}>{card.badge}</span>
                 </div>

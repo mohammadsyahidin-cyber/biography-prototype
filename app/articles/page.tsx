@@ -160,12 +160,19 @@ export default function ArticlesPage() {
           {/* Header */}
           <div className="shrink-0 font-outfit" style={{ padding: "12px 20px 0" }}>
             <h1 style={{ fontSize: 22, fontWeight: 700, color: "var(--text-primary)", marginBottom: 4 }}>文章</h1>
+            <p style={{ fontSize: 13, color: "var(--text-secondary)" }}>共 0 篇文章</p>
+          </div>
+          {/* Filter tabs */}
+          <div className="shrink-0 flex gap-2 font-outfit" style={{ padding: "14px 20px 8px" }}>
+            <div style={{ padding: "6px 14px", borderRadius: 20, fontSize: 13, fontWeight: 500, backgroundColor: "var(--accent-green)", color: "var(--white)" }}>全部</div>
+            <div style={{ padding: "6px 14px", borderRadius: 20, fontSize: 13, fontWeight: 500, backgroundColor: "var(--bg-muted)", color: "var(--text-secondary)" }}>已定稿</div>
+            <div style={{ padding: "6px 14px", borderRadius: 20, fontSize: 13, fontWeight: 500, backgroundColor: "var(--bg-muted)", color: "var(--text-secondary)" }}>草稿</div>
           </div>
           <div className="flex-1 flex flex-col items-center justify-center" style={{ backgroundColor: "var(--bg-page)" }}>
             <EmptyState
               icon={<FileText size={36} style={{ color: "var(--text-tertiary)" }} />}
-              title="还没有文章"
-              description="登录后开始采访，生成专属文章"
+              title="暂无文章"
+              description="完成采访后，选择话题生成文章"
             />
           </div>
         </>
