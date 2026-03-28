@@ -43,7 +43,7 @@ export default function OnboardingPage() {
             style={{ padding: "16px 24px 0" }}
           >
             <button
-              onClick={() => router.push("/login")}
+              onClick={() => router.push("/home")}
               style={{
                 fontSize: 14,
                 color: "#A69A8B",
@@ -155,7 +155,7 @@ export default function OnboardingPage() {
           <button
             onClick={() => {
               if (isLast) {
-                router.push("/login");
+                router.push("/home");
               } else {
                 setStep(step + 1);
               }

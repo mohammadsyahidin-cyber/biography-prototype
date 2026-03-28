@@ -45,7 +45,7 @@ export default function HomePage() {
                 description="创建第一本传记，用文字留住温暖的记忆"
                 action={
                   <Link
-                    href="/create-biography"
+                    href="/login"
                     className="flex items-center justify-center gap-2"
                     style={{
                       height: 48,
