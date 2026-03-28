@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
@@ -59,6 +60,7 @@ const articleBody = [
 ];
 
 export default function ArticleFinalPage() {
+  const router = useRouter();
   const [showToc, setShowToc] = useState(false);
   const [showShare, setShowShare] = useState(false);
   const [liked, setLiked] = useState(false);
@@ -78,8 +80,8 @@ export default function ArticleFinalPage() {
         className="shrink-0 flex items-center justify-between font-outfit"
         style={{ height: 52, padding: "0 16px" }}
       >
-        <Link
-          href="/home"
+        <button
+          onClick={() => router.back()}
           className="flex items-center justify-center"
           style={{
             width: 36,
@@ -89,7 +91,7 @@ export default function ArticleFinalPage() {
           }}
         >
           <ChevronLeft size={20} style={{ color: "var(--text-primary)" }} />
-        </Link>
+        </button>
       </div>
 
       {/* Article content */}
