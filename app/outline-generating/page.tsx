@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
-import { Loader2 } from "lucide-react";
+import { Loader2, ArrowLeft } from "lucide-react";
 
 const steps = [
   "正在梳理对话内容…",
@@ -142,8 +142,30 @@ export default function OutlineGeneratingPage() {
         >
           小叙正在为您规划传记结构
           <br />
-          预计需要 10-20 秒
+          生成完成后会通知你
         </p>
+
+        {/* Back button */}
+        <button
+          onClick={() => router.back()}
+          className="flex items-center justify-center gap-2"
+          style={{
+            marginTop: 24,
+            height: 44,
+            paddingLeft: 24,
+            paddingRight: 24,
+            borderRadius: 22,
+            backgroundColor: "var(--bg-muted)",
+            border: "1px solid var(--border-strong)",
+            fontSize: 14,
+            fontWeight: 600,
+            color: "var(--accent-green)",
+            cursor: "pointer",
+          }}
+        >
+          <ArrowLeft size={16} />
+          返回，后台继续生成
+        </button>
       </div>
 
       <style jsx>{`
